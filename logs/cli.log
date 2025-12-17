@@ -1,0 +1,486 @@
+2025-12-16 16:13:52 [INFO] kmchat.cli - Inizializzazione agente con modello llama3.1
+2025-12-16 16:13:56 [INFO] kmchat.cli - Prompt utente: Cosa c’è da fare Lunedì?
+2025-12-16 16:15:53 [ERROR] kmchat.cli - Errore durante la chat: peer closed connection without sending complete message body (incomplete chunked read)
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 271, in __aiter__
+    async for part in self._httpcore_stream:
+        yield part
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 407, in __aiter__
+    raise exc from None
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 403, in __aiter__
+    async for part in self._stream:
+        yield part
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_async/http11.py", line 342, in __aiter__
+    raise exc
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_async/http11.py", line 334, in __aiter__
+    async for chunk in self._connection._receive_response_body(**kwargs):
+        yield chunk
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_async/http11.py", line 203, in _receive_response_body
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_async/http11.py", line 213, in _receive_event
+    with map_exceptions({h11.RemoteProtocolError: RemoteProtocolError}):
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/src/main.py", line 150, in chat_loop
+    result = await handler
+             ^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/workflows/runtime/broker.py", line 167, in _run_workflow
+    workflow_result = await registered.workflow_function(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/workflows/runtime/control_loop.py", line 308, in control_loop
+    return await runner.run(start_event=start_event)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/workflows/runtime/control_loop.py", line 281, in run
+    result = await self.process_command(command)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/workflows/runtime/control_loop.py", line 200, in process_command
+    raise command.exception
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/workflows/runtime/types/step_function.py", line 118, in wrapper
+    result = await partial_func()
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index_instrumentation/dispatcher.py", line 386, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/agent/workflow/base_agent.py", line 398, in run_agent_step
+    agent_output = await self.take_step(
+                   ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/agent/workflow/react_agent.py", line 153, in take_step
+    last_chat_response = await self._get_streaming_response(ctx, input_chat)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/agent/workflow/react_agent.py", line 92, in _get_streaming_response
+    async for last_chat_response in response:
+    ...<19 lines>...
+            )
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/llms/callbacks.py", line 89, in wrapped_gen
+    async for x in f_return_val:
+    ...<8 lines>...
+        last_response = x
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/llms/ollama/base.py", line 545, in gen
+    async for r in response:
+    ...<52 lines>...
+        )
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/ollama/_client.py", line 759, in inner
+    async for line in r.aiter_lines():
+    ...<3 lines>...
+      yield cls(**part)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_models.py", line 1031, in aiter_lines
+    async for text in self.aiter_text():
+        for line in decoder.decode(text):
+            yield line
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_models.py", line 1018, in aiter_text
+    async for byte_content in self.aiter_bytes():
+    ...<2 lines>...
+            yield chunk
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_models.py", line 997, in aiter_bytes
+    async for raw_bytes in self.aiter_raw():
+    ...<2 lines>...
+            yield chunk
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_models.py", line 1055, in aiter_raw
+    async for raw_stream_bytes in self.stream:
+    ...<2 lines>...
+            yield chunk
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_client.py", line 176, in __aiter__
+    async for chunk in self._stream:
+        yield chunk
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 270, in __aiter__
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)
+2025-12-16 23:29:20 [INFO] kmchat.cli - Inizializzazione agente con modello llama3.1
+2025-12-16 23:29:32 [INFO] kmchat.cli - Prompt utente: Cosa c'è da fare Lunedì
+2025-12-16 23:31:56 [INFO] kmchat.cli - Inizializzazione agente con modello llama3.1
+2025-12-16 23:31:56 [INFO] kmchat.cli - Test prompt: Cosa c'è in programma per Lunedì?
+2025-12-16 23:35:31 [INFO] kmchat.cli - Inizializzazione agente con modello llama3.1
+2025-12-16 23:35:31 [INFO] kmchat.cli - Test prompt: Cosa c'è in programma per Lunedì?
+2025-12-16 23:36:22 [INFO] kmchat.cli - Inizializzazione agente con modello llama3.1
+2025-12-16 23:36:22 [INFO] kmchat.cli - Test prompt: Ciao!
+2025-12-16 23:39:11 [INFO] kmchat.cli - Inizializzazione agente con modello llama3.1
+2025-12-16 23:39:11 [INFO] kmchat.cli - Test prompt: Ciao!
+2025-12-16 23:42:59 [INFO] kmchat.cli - Inizializzazione agente con modello llama3.1
+2025-12-16 23:43:00 [INFO] kmchat.cli - Test prompt: Ciao!
+2025-12-16 23:49:00 [INFO] kmchat.cli - Esecuzione tool: get_schedule con args {'day': 'Lunedì'}
+2025-12-16 23:50:00 [ERROR] kmchat.cli - Errore agente: timed out
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_sync/connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_sync/http11.py", line 136, in handle_request
+    raise exc
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_sync/http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_sync/http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_sync/http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+        self.READ_NUM_BYTES, timeout=timeout
+    )
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_backends/sync.py", line 126, in read
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/src/main.py", line 285, in run_lite_agent
+    final_resp = llm.complete(final_prompt).text
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index_instrumentation/dispatcher.py", line 335, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/llms/callbacks.py", line 435, in wrapped_llm_predict
+    f_return_val = f(_self, *args, **kwargs)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/llms/ollama/base.py", line 656, in complete
+    return chat_to_completion_decorator(self.chat)(prompt, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/base/llms/generic_utils.py", line 184, in wrapper
+    chat_response = func(messages, **kwargs)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index_instrumentation/dispatcher.py", line 335, in wrapper
+    result = func(*args, **kwargs)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/llms/callbacks.py", line 175, in wrapped_llm_chat
+    f_return_val = f(_self, messages, **kwargs)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/llms/ollama/base.py", line 394, in chat
+    response = self.client.chat(
+        model=self.model,
+    ...<6 lines>...
+        keep_alive=self.keep_alive,
+    )
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/ollama/_client.py", line 365, in chat
+    return self._request(
+           ~~~~~~~~~~~~~^
+      ChatResponse,
+      ^^^^^^^^^^^^^
+    ...<14 lines>...
+      stream=stream,
+      ^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/ollama/_client.py", line 189, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/ollama/_client.py", line 129, in _request_raw
+    r = self._client.request(*args, **kwargs)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout: timed out
+2025-12-16 23:51:11 [INFO] kmchat.cli - Esecuzione tool: get_schedule con args {'day': 'Lunedì'}
+2025-12-16 23:54:30 [INFO] kmchat.cli - Esecuzione tool: add_activity con args {'name': 'Visita parenti', 'description': 'Arrivano zii', 'days': ['Lunedì'], 'time': '08:00'}
+2025-12-17 00:06:01 [ERROR] kmchat.cli - Errore agente: model 'llama3.2' not found (status code: 404)
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/src/main.py", line 124, in run_lite_agent
+    for token in response_gen:
+                 ^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/llms/callbacks.py", line 448, in wrapped_gen
+    for x in f_return_val:
+             ^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/base/llms/generic_utils.py", line 132, in gen
+    for response in chat_response_gen:
+                    ^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/core/llms/callbacks.py", line 188, in wrapped_gen
+    for x in f_return_val:
+             ^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/llms/ollama/base.py", line 452, in gen
+    options=self._model_kwargs,
+            ^^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/llms/ollama/base.py", line 211, in _model_kwargs
+    "num_ctx": self.get_context_window(),
+               ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/llama_index/llms/ollama/base.py", line 221, in get_context_window
+    info = self.client.show(self.model).modelinfo
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/ollama/_client.py", line 636, in show
+    return self._request(
+           ~~~~~~~~~~~~~^
+      ShowResponse,
+      ^^^^^^^^^^^^^
+    ...<4 lines>...
+      ).model_dump(exclude_none=True),
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/ollama/_client.py", line 189, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/venv/lib/python3.13/site-packages/ollama/_client.py", line 133, in _request_raw
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: model 'llama3.2' not found (status code: 404)
+2025-12-17 00:12:24 [ERROR] kmchat.cli - Errore parsing JSON LLM: Expecting property name enclosed in double quotes: line 2 column 1 (char 2). Risposta grezza: {
+{
+ {
+  "{
+  "action{
+  "action":{
+  "action": "{
+  "action": "reply{
+  "action": "reply",
+{
+  "action": "reply",
+ {
+  "action": "reply",
+  "{
+  "action": "reply",
+  "message{
+  "action": "reply",
+  "message":{
+  "action": "reply",
+  "message": "{
+  "action": "reply",
+  "message": "C{
+  "action": "reply",
+  "message": "Ciao{
+  "action": "reply",
+  "message": "Ciao!{
+  "action": "reply",
+  "message": "Ciao! S{
+  "action": "reply",
+  "message": "Ciao! Sono{
+  "action": "reply",
+  "message": "Ciao! Sono KM{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat,{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assist{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente med{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intellig{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente.{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come pos{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso ai{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiut{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti oggi{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti oggi?"
+{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti oggi?"
+}{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti oggi?"
+}
+2025-12-17 00:13:06 [ERROR] kmchat.cli - Errore parsing JSON LLM: Expecting property name enclosed in double quotes: line 2 column 1 (char 2). Risposta grezza: {
+{
+ {
+  "{
+  "action{
+  "action":{
+  "action": "{
+  "action": "reply{
+  "action": "reply",
+{
+  "action": "reply",
+ {
+  "action": "reply",
+  "{
+  "action": "reply",
+  "message{
+  "action": "reply",
+  "message":{
+  "action": "reply",
+  "message": "{
+  "action": "reply",
+  "message": "C{
+  "action": "reply",
+  "message": "Ciao{
+  "action": "reply",
+  "message": "Ciao!{
+  "action": "reply",
+  "message": "Ciao! S{
+  "action": "reply",
+  "message": "Ciao! Sono{
+  "action": "reply",
+  "message": "Ciao! Sono KM{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat,{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assist{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente med{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intellig{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente.{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come pos{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso ai{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiut{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti oggi{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti oggi?"
+{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti oggi?"
+}{
+  "action": "reply",
+  "message": "Ciao! Sono KMChat, il tuo assistente medico intelligente. Come posso aiutarti oggi?"
+}
+2025-12-17 00:17:06 [INFO] kmchat.cli - Esecuzione tool: get_schedule con args {'day': 'Lunedè'}
+2025-12-17 00:18:17 [ERROR] kmchat.cli - Errore parsing JSON LLM: Expecting value: line 1 column 1 (char 0). Risposta grezza: JSON:
+{
+  "action": "call_tool",
+  "tool_name": "add_activity",
+  "arguments": {
+    "name": "Visita",
+    "description": "Importante",
+    "days": ["Lunedì"],
+    "time": "08:00"
+  }
+}
+2025-12-17 00:19:01 [INFO] kmchat.cli - Esecuzione tool: add_activity con args {'name': 'Visita', 'description': 'Importante', 'days': ['Lunedì'], 'time': '08:00'}
+2025-12-17 00:25:12 [ERROR] kmchat.cli - Errore parsing JSON LLM: Expecting value: line 1 column 1 (char 0). Risposta grezza: Non sono pronto per rispondere. Per favore, fornisci l'esempio completo dell'interazione con l'utente. 
+
+(Nota: non ho capito bene cosa si aspetti come risposta finale)
+2025-12-17 00:27:21 [INFO] kmchat.cli - Esecuzione tool: get_schedule con args {'day': 'Lunedì'}
+2025-12-17 00:30:04 [INFO] kmchat.cli - Esecuzione tool: add_activity con args {'name': 'Visita', 'description': 'Importante', 'days': ['Lunedì'], 'time': '08:00'}
+2025-12-17 01:03:03 [ERROR] kmchat.cli - Errore parsing JSON LLM: Expecting value: line 1 column 1 (char 0). Risposta grezza: Ciao Anna Verdi!
+
+Sono KMChat, il tuo assistente medico intelligente per la gestione delle terapie. Come posso esserti utile oggi?
+
+Se hai bisogno di informazioni o vuoi aggiornare le attività del paziente Mario Rossi, puoi chiedere. Altrimenti, possiamo iniziare con un saluto e vedere come posso aiutarti.
+
+Se hai bisogno di consultare le linee guida o di aggiungere una nuova attività, puoi utilizzare i tool disponibili. Per esempio, per sapere cosa c'è in programma per domani, puoi chiedere `get_schedule` con il giorno specifico.
+
+Per quanto riguarda l'informazione che hai appena condiviso sul paziente Mario Rossi, posso aiutarti a consultare le linee guida o a salvare questa informazione. Tuttavia, per prima cosa, vorrei sapere se c'è qualcos'altro che puoi aggiungere su questo argomento.
+
+Se hai bisogno di qualcosa in particolare, non esitare a chiedere!
+
+Per favore, rispondi con un messaggio o chiedi di utilizzare uno dei tool disponibili.
+2025-12-17 01:05:49 [ERROR] kmchat.cli - Errore agente: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/src/main.py", line 245, in run_lite_agent
+    args = data.get("arguments", {{}})
+                                 ^^^^
+TypeError: unhashable type: 'dict'
+2025-12-17 01:07:34 [ERROR] kmchat.cli - Errore agente: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/src/main.py", line 249, in run_lite_agent
+    args = data.get("arguments", {{}})
+                                 ^^^^
+TypeError: unhashable type: 'dict'
+2025-12-17 01:09:44 [ERROR] kmchat.cli - Errore agente: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/src/main.py", line 255, in run_lite_agent
+    args = data.get("arguments", {{}})
+                                 ^^^^
+TypeError: unhashable type: 'dict'
+2025-12-17 01:11:29 [ERROR] kmchat.cli - Errore agente: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "/Users/eldemaster/Documents/Uni/Digital Transformation/FinalProject/KMChat/src/main.py", line 255, in run_lite_agent
+    args = data.get("arguments", {{}})
+                                 ^^^^
+TypeError: unhashable type: 'dict'
+2025-12-17 01:13:21 [INFO] kmchat.cli - Esecuzione tool: save_knowledge con args {'category': 'patient', 'content': 'Il paziente ha avuto un calo di zuccheri alle 10:00 in data odierna.'}
+2025-12-17 01:13:22 [INFO] kmchat.cli - Nota indicizzata in ChromaDB: Il paziente ha avuto un calo di zuccheri alle 10:00 in data odierna.
+2025-12-17 01:19:40 [INFO] kmchat.cli - Esecuzione tool: consult_guidelines con args {'query': 'Digiuno liquido per esami'}
+2025-12-17 01:24:04 [INFO] kmchat.cli - Esecuzione tool: save_knowledge con args {'category': 'patient', 'content': 'Il paziente deve stare a digiuno di liquidi per 24 ore.'}
+2025-12-17 01:24:05 [INFO] kmchat.cli - Nota indicizzata in ChromaDB: Il paziente deve stare a digiuno di liquidi per 24 ore.
+2025-12-17 01:27:07 [INFO] kmchat.cli - Esecuzione tool: add_activity con args {'name': "Bere 2 litri d'acqua", 'description': '', 'days': ['Lunedì'], 'time': '10:00'}
+2025-12-17 01:30:41 [INFO] kmchat.cli - Esecuzione tool: add_activity con args {'name': "Bere 2 litri d'acqua", 'description': '', 'days': ['Lunedì'], 'time': '10:00'}
+2025-12-17 01:31:58 [WARNING] kmchat.cli - Blocco semantico attivato: SI: La nuova attività consiste nel bere 2 litri d'acqua, mentre il paziente deve stare a digiuno di liquidi per 24 ore. Questo significa che l'attività è in conflitto con uno dei vincoli del paziente.

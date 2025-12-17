@@ -1,0 +1,142 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{dolphin}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{listings}
+
+% Informazioni sul documento
+\title{[25-KMChat] Managing Knowledge in Chat with LLMs}
+\subtitle{Progetto Digital Transformation}
+\author{Alessandro De Martini}
+\date{17 Dicembre 2025}
+
+\begin{document}
+
+% Slide Titolo
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Slide 1: Scenario
+\begin{frame}{Scenario e Contesto}
+    \begin{block}{Ambito Healthcare}
+        Gestione delle terapie domiciliari tramite un assistente virtuale (LLM) a supporto del caregiver (es. infermiere).
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    \textbf{Il Flusso di Lavoro:}
+    \begin{itemize}
+        \item Esiste una \textbf{terapia definita} (knowledge statica/pregressa).
+        \item Il caregiver interagisce per \textbf{modifiche giornaliere} (nuova knowledge).
+        \item Necessità di gestire eccezioni, urgenze e adattamenti.
+    \end{itemize}
+\end{frame}
+
+% Slide 2: Requisiti del Sistema
+\begin{frame}{Obiettivi e Requisiti Chiave}
+    Il sistema deve garantire quattro capacità fondamentali:
+    
+    \vspace{0.5cm}
+    
+    \begin{enumerate}
+        \item \textbf{Recupero Conoscenza (RAG):} Accedere alle linee guida e alle terapie esistenti.
+        \item \textbf{Rilevamento Conflitti:} Identificare incoerenze tra la richiesta e la terapia (es. sovrapposizioni orarie, vincoli medici).
+        \item \textbf{Supporto alla Risoluzione:} Segnalare il conflitto al caregiver (Human-in-the-loop), senza decidere autonomamente.
+        \item \textbf{Estrazione Conoscenza:} Aggiornare la base dati con le nuove informazioni strutturate (JSON).
+    \end{enumerate}
+\end{frame}
+
+% Slide 3: La Sfida Tecnica
+\begin{frame}{La Sfida: Perché il solo LLM non basta?}
+    \begin{alertblock}{Il Problema della Coerenza}
+        Gli LLM (Large Language Models) sono probabilistici, non deterministici.
+    \end{alertblock}
+    
+    \vspace{0.5cm}
+    
+    \begin{itemize}
+        \item \textbf{Hallucination:} Un LLM potrebbe "dimenticare" un appuntamento se il contesto è troppo lungo.
+        \item \textbf{Calcolo Temporale:} Gli LLM faticano a calcolare sovrapposizioni precise di orari (es. 10:00-11:00 vs 10:45-11:15).
+        \item \textbf{Persistenza:} La chat è effimera; le modifiche alla terapia devono essere salvate in modo strutturato.
+    \end{itemize}
+\end{frame}
+
+% Slide 4: Architettura Proposta
+\begin{frame}{Soluzione: Architettura Ibrida (ReAct Agent)}
+    Abbiamo implementato un'architettura che separa la \textbf{Semantica} dalla \textbf{Logica}.
+    
+    \vspace{0.5cm}
+    
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Componente Semantico (LLM)}
+        \begin{itemize}
+            \item \textbf{Motore:} Llama 3.1 (Locale)
+            \item \textbf{Ruolo:} Comprende il linguaggio naturale, estrae intenti, cerca linee guida.
+            \item \textbf{Tecnologia:} ChromaDB (RAG).
+        \end{itemize}
+        
+        \column{0.5\textwidth}
+        \textbf{Componente Logico (Rule-Based)}
+        \begin{itemize}
+            \item \textbf{Motore:} Knowledge Manager (Python)
+            \item \textbf{Ruolo:} Validazione rigida degli orari, gestione JSON, persistenza.
+            \item \textbf{Tecnologia:} Pydantic models.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+% Slide 5: Stack Tecnologico
+\begin{frame}{Stack Tecnologico}
+    Scelte progettuali orientate alla privacy (Ambiente Locale) e all'efficienza.
+    
+    \vspace{0.5cm}
+    
+    \begin{description}
+        \item[LLM Runtime] \textbf{Ollama} (con modello \texttt{llama3.1:8b}). Privacy totale dei dati sanitari.
+        \item[Framework] \textbf{LlamaIndex}. Orchestrazione avanzata per Agenti ReAct.
+        \item[Vector DB] \textbf{ChromaDB}. Per indicizzare il PDF e le note non strutturate.
+        \item[Data Layer] \textbf{Pydantic \& JSON}. Per la gestione strutturata delle Terapie e Attività.
+    \end{description}
+\end{frame}
+
+% Slide 6: Stato Avanzamento
+\begin{frame}{Implementazione Attuale (Done)}
+    \textbf{Step 1: Modellazione Dati}
+    \begin{itemize}
+        \item Definizione schemi JSON per \texttt{Activity} e \texttt{Therapy} (come da specifiche).
+    \end{itemize}
+    
+    \textbf{Step 2: Knowledge Ingestion}
+    \begin{itemize}
+        \item Script di caricamento dati su ChromaDB per ricerca semantica.
+    \end{itemize}
+    
+    \textbf{Step 3: Conflict Engine}
+    \begin{itemize}
+        \item Modulo Python (\texttt{KnowledgeManager}) che rileva sovrapposizioni temporali matematiche.
+    \end{itemize}
+    
+    \textbf{Step 4: Agente Interattivo}
+    \begin{itemize}
+        \item CLI Chatbot che usa i \textit{Tools} per decidere autonomamente se leggere il calendario o consultare le linee guida.
+    \end{itemize}
+\end{frame}
+
+% Slide 7: Next Steps
+\begin{frame}{Prossimi Passi}
+    \begin{itemize}
+        \item \textbf{Interfaccia Web:} Porting da CLI a Streamlit per una UX migliore.
+        \item \textbf{Conflitti Semantici Avanzati:} Usare l'LLM per rilevare conflitti non temporali (es. interazioni farmaci).
+        \item \textbf{Gestione Profili:} Implementare preferenze specifiche per Paziente e Caregiver.
+    \end{itemize}
+    
+    \vspace{1cm}
+    \centerline{\Large \textbf{Grazie per l'attenzione}}
+\end{frame}
+
+\end{document}
