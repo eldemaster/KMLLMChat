@@ -1,0 +1,295 @@
+{
+    "patient_id": "paolo_verdi",
+    "activities": [
+        {
+            "activity_id": "pv_001",
+            "name": "Mobilizzazione articolare",
+            "description": "Esercizi leggeri per le articolazioni",
+            "day_of_week": [
+                "Lunedì",
+                "Giovedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "pv_002",
+            "name": "Terapia calda",
+            "description": "Applicazione impacchi caldi",
+            "day_of_week": [
+                "Martedì",
+                "Venerdì"
+            ],
+            "time": "16:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768426504",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768426770",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768426943",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768427215",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768427390",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768427660",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768427835",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768428104",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768428283",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768428553",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768428650",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768428718",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768428799",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768428893",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768429042",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768429133",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768429284",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768429381",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768429449",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768429529",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        },
+        {
+            "activity_id": "temp_1768429622",
+            "name": "Stretching leggero",
+            "description": "Stretching leggero",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768429690",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        }
+    ]
+}

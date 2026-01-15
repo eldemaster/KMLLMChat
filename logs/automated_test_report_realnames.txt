@@ -1,0 +1,132 @@
+KMChat Automated Test Run - 2026-01-14 20:22:43
+Model: kmchat-14b
+
+
+==================== SCENARIO: 01_MARIO_FULL_FLOW ====================
+
+👤 USER: Passa al paziente Mario Rossi
+🤖 BOT: Contesto aggiornato: Mario Rossi, Andrea.
+
+👤 USER: Passa al caregiver Andrea Bianchi
+🤖 BOT: Contesto aggiornato: Mario Rossi, Andrea Bianchi.
+
+👤 USER: Dimmi le attività di lunedì
+🤖 BOT: Programma Lunedì:
+- [08:00] Colazione leggera: Colazione con yogurt e frutta
+- [07:30] Misurazione glicemia: Misurare glicemia a digiuno
+
+
+👤 USER: Aggiungi attività 'Colazione zuccherata' lunedì alle 08:00
+🤖 BOT: Azione in sospeso: modify_activity con {'old_name': 'Colazione leggera', 'day': 'Lunedì', 'new_name': 'Colazione zuccherata', 'new_description': 'Colazione zuccherata', 'new_time': '08:00', 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Avviso Semantico: SÌ: Contraddice la regola di evitare zuccheri semplici per il controllo del diabete..
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: No
+🤖 BOT: Azione annullata.
+
+👤 USER: Aggiungi attività 'Visita nutrizionista' martedì alle 10:30
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Visita nutrizionista', 'description': 'Visita nutrizionista', 'days': ['Martedì'], 'time': '10:30', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Dimmi le attività della settimana
+🤖 BOT: Programma settimanale:
+Lunedì:
+- [08:00] Colazione leggera: Colazione con yogurt e frutta
+- [07:30] Misurazione glicemia: Misurare glicemia a digiuno
+Martedì:
+- [09:30] Camminata mattutina: Passeggiata di 20 minuti
+- [10:30] Visita nutrizionista: Visita nutrizionista
+Mercoledì:
+- [08:00] Colazione leggera: Colazione con yogurt e frutta
+- [07:30] Misurazione glicemia: Misurare glicemia a digiuno
+Giovedì:
+- [09:30] Camminata mattutina: Passeggiata di 20 minuti
+Venerdì:
+- [08:00] Colazione leggera: Colazione con yogurt e frutta
+- [07:30] Misurazione glicemia: Misurare glicemia a digiuno
+Sabato:
+- (nessuna attività)
+Domenica:
+- (nessuna attività)
+
+
+👤 USER: Debug RAG: Diabete di tipo 2
+🤖 BOT: Il risultato del debug per "Diabete di tipo 2" è conforme alle aspettative. La condizione è stata correttamente identificata nel profilo del paziente Mario Rossi con i metadati appropriati:
+
+- **Tipo**: patient_condition
+- **Fonte**: patient_profile
+- **ID Paziente**: mario_rossi
+- **Categoria**: conditions
+
+Non ci sono errori o conflitti rilevanti per questa condizione.
+
+==================== SCENARIO: 02_PAOL0_FULL_FLOW ====================
+
+👤 USER: Passa al paziente Paolo Verdi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Andrea Bianchi.
+
+👤 USER: Passa al caregiver Maria Rossi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Maria Rossi.
+
+👤 USER: Dimmi le attività di martedì
+🤖 BOT: Programma Martedì:
+- [16:00] Terapia calda: Applicazione impacchi caldi
+
+
+👤 USER: Aggiungi attività 'Terapia calda' martedì alle 16:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Terapia calda', 'description': 'Terapia calda', 'days': ['Martedì'], 'time': '16:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Terapia calda' (16:00) nei giorni {'Martedì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: No
+🤖 BOT: Azione annullata.
+
+👤 USER: Aggiungi attività 'Stretching leggero' lunedì alle 10:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Stretching leggero', 'description': 'Stretching leggero', 'days': ['Lunedì'], 'time': '10:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Mobilizzazione articolare' (10:00) nei giorni {'Lunedì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: No
+🤖 BOT: Azione annullata.
+
+👤 USER: Aggiungi attività 'Controllo fisioterapico' mercoledì alle 11:00 per i prossimi 3 giorni
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Controllo fisioterapico', 'description': 'Controllo fisioterapico', 'days': ['Mercoledì', 'Giovedì', 'Venerdì'], 'time': '11:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': '2026-01-14', 'valid_until': '2026-01-17', 'duration_days': 3}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Dimmi le attività di mercoledì
+🤖 BOT: Programma Mercoledì:
+- [11:00] Controllo fisioterapico: Controllo fisioterapico
+
+
+👤 USER: Debug RAG: Mobilizzazione articolare
+🤖 BOT: L'attività "Mobilizzazione articolare" è correttamente registrata per Paolo Verdi. Gli esercizi leggeri sono previsti i lunedì e giovedì alle 10:00 senza dipendenze da altre attività. Meta: type=therapy_activity, source=therapy_json, patient_id=paolo_verdi, activity_id=pv_001.
+
+==================== SCENARIO: 03_KNOWLEDGE_EXTRACTION ====================
+
+👤 USER: Passa al paziente Mario Rossi
+🤖 BOT: Contesto aggiornato: Mario Rossi, Maria Rossi.
+
+👤 USER: Il paziente non deve assumere FANS
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'conditions', 'content': 'Il paziente non deve assumere FANS', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Condizione medica salvata. e indicizzata.
+
+👤 USER: Quando dico mattina intendo 08:00-10:00
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'Quando dico mattina intendo 08:00-10:00', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+
+👤 USER: Quali sono le condizioni del paziente?
+🤖 BOT: Condizioni mediche: Diabete di tipo 2, Ipertensione, Il paziente non deve assumere FANS.
+
+👤 USER: Quali sono le note del caregiver?
+🤖 BOT: Note caregiver: Preferisce dettaglio sugli orari, Quando dico mattina intendo 08:00-10:00.
+
+👤 USER: Debug RAG: non deve assumere FANS
+🤖 BOT: Il paziente Mario_Rossi non deve assumere FANS. Questa informazione è stata estratta da una conversazione precedente e registrata come condizione del paziente. Ho aggiornato il profilo del paziente con questa nota.

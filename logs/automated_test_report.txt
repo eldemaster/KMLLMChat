@@ -1,0 +1,476 @@
+KMChat Automated Test Run - 2026-01-15 09:02:29
+Model: kmchat-14b
+
+
+==================== SCENARIO: 01_BASIC_ADD_CONFIRM ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Dimmi le attività di lunedì
+🤖 BOT: Nessuna attività per Lunedì.
+
+👤 USER: Aggiungi attività 'Lettura libro' lunedì alle 16:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Lettura libro', 'description': 'Lettura libro', 'days': ['Lunedì'], 'time': '16:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Dimmi le attività di lunedì
+🤖 BOT: Programma Lunedì:
+- [16:00] Lettura libro: Lettura libro
+
+
+==================== SCENARIO: 02_CONFLICT_DETECTION ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Aggiungi attività 'Fisioterapia' martedì alle 10:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Fisioterapia', 'description': 'Fisioterapia', 'days': ['Martedì'], 'time': '10:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Aggiungi attività 'Visita Infermieristica' martedì alle 10:15
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Visita Infermieristica', 'description': 'Visita Infermieristica', 'days': ['Martedì'], 'time': '10:15', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Fisioterapia' (10:00) nei giorni {'Martedì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: No
+🤖 BOT: Azione annullata.
+
+👤 USER: Dimmi le attività di martedì
+🤖 BOT: Programma Martedì:
+- [10:00] Fisioterapia: Fisioterapia
+
+
+==================== SCENARIO: 03_KNOWLEDGE_EXTRACTION ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Il paziente non può bere latte a colazione
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'conditions', 'content': 'Il paziente non può bere latte a colazione', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Condizione medica salvata. e indicizzata.
+
+👤 USER: Quali sono le condizioni del paziente?
+🤖 BOT: Condizioni mediche: Il paziente non può bere latte a colazione.
+
+==================== SCENARIO: 04_CARE_GIVER_PREFS ====================
+
+👤 USER: Quando dico 'sera' intendo le ore 21:00
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': "Quando dico 'sera' intendo le ore 21:00", 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Aggiungi attività 'Camomilla' mercoledì di sera
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+Azione in sospeso: add_activity con {'name': 'Camomilla', 'description': 'Camomilla', 'days': ['Mercoledì'], 'time': '21:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Dimmi le attività di mercoledì
+🤖 BOT: Programma Mercoledì:
+- [21:00] Camomilla: Camomilla
+
+
+==================== SCENARIO: 05_MEDICAL_CONFLICT ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Il paziente ha il diabete di tipo 1
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'conditions', 'content': 'Il paziente ha il diabete di tipo 1', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Aggiungi attività 'Merenda con Torta' giovedì alle 16:00
+🤖 BOT: Condizione medica salvata. e indicizzata.
+Azione in sospeso: add_activity con {'name': 'Merenda con Torta', 'description': 'Merenda con Torta', 'days': ['Giovedì'], 'time': '16:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: No
+🤖 BOT: Azione annullata.
+
+👤 USER: Dimmi le attività di giovedì
+🤖 BOT: Nessuna attività per Giovedì.
+
+==================== SCENARIO: 06_DEPENDENCY_BREAK ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Aggiungi attività 'Pillola A' venerdì alle 08:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Pillola A', 'description': 'Pillola A', 'days': ['Venerdì'], 'time': '08:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Aggiungi attività 'Pillola B' venerdì alle 08:30 con dipendenza Pillola A
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Pillola B', 'description': 'Pillola B', 'days': ['Venerdì'], 'time': '08:30', 'dependencies': ['Pillola A'], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Rimuovi attività 'Pillola A' di venerdì
+🤖 BOT: Azione in sospeso: delete_activity con {'name': 'Pillola A', 'day': 'Venerdì', 'force': False, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Annulla
+🤖 BOT: Azione annullata.
+
+==================== SCENARIO: 07_ACTIVITY_UPDATE_SUBSTITUTION ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Aggiungi attività 'Camminata' lunedì alle 18:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Camminata', 'description': 'Camminata', 'days': ['Lunedì'], 'time': '18:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Sostituisci l'attività Camminata di lunedì con 'Cyclette al chiuso' alle 18:00
+🤖 BOT: Azione in sospeso: modify_activity con {'old_name': 'Camminata', 'day': 'Lunedì', 'new_name': 'Cyclette al chiuso', 'new_description': 'Cyclette al chiuso', 'new_time': '18:00', 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività 'Camminata' modificata in 'Cyclette al chiuso' con successo.
+
+👤 USER: Dimmi le attività di lunedì
+🤖 BOT: Programma Lunedì:
+- [16:00] Lettura libro: Lettura libro
+- [18:00] Cyclette al chiuso: Cyclette al chiuso
+
+
+==================== SCENARIO: 08_INDIRECT_CONFLICT_RULE ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Il paziente non deve assumere liquidi per 24 ore
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'conditions', 'content': 'Il paziente non deve assumere liquidi per 24 ore', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Aggiungi attività 'Assunzione farmaci con acqua' lunedì alle 12:00
+🤖 BOT: Condizione medica salvata. e indicizzata.
+Azione in sospeso: add_activity con {'name': 'Assunzione farmaci con acqua', 'description': 'Assunzione farmaci con acqua', 'days': ['Lunedì'], 'time': '12:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Avviso Semantico: SÌ: Violazione del vincolo di non assumere liquidi per 24 ore..
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: No
+🤖 BOT: Azione annullata.
+
+👤 USER: Dimmi le attività di lunedì
+🤖 BOT: Programma Lunedì:
+- [16:00] Lettura libro: Lettura libro
+- [18:00] Cyclette al chiuso: Cyclette al chiuso
+
+
+==================== SCENARIO: 09_CAREGIVER_ROUTINE_CHANGE ====================
+
+👤 USER: La mia visita abituale è alle 18:00
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'La mia visita abituale è alle 18:00', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+
+👤 USER: Oggi visita anticipata alle 14:00
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'Oggi visita anticipata alle 14:00', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+
+👤 USER: Quali sono le note del caregiver?
+🤖 BOT: Note caregiver: Quando dico 'sera' intendo le ore 21:00, La mia visita abituale è alle 18:00, Oggi visita anticipata alle 14:00.
+
+==================== SCENARIO: 10_SEMANTIC_AMBIGUITY ====================
+
+👤 USER: Quando dico Aulin intendo la forma granulare
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'Quando dico Aulin intendo la forma granulare', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+
+👤 USER: Da oggi Aulin intendo la supposta
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'Da oggi Aulin intendo la supposta', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+
+👤 USER: Quali sono le note del caregiver?
+🤖 BOT: Note caregiver: Quando dico 'sera' intendo le ore 21:00, La mia visita abituale è alle 18:00, Oggi visita anticipata alle 14:00, Quando dico Aulin intendo la forma granulare, Da oggi Aulin intendo la supposta.
+
+==================== SCENARIO: 11_WEEKLY_SCHEDULE ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Dimmi le attività della settimana
+🤖 BOT: Programma settimanale:
+Lunedì:
+- [16:00] Lettura libro: Lettura libro
+- [18:00] Cyclette al chiuso: Cyclette al chiuso
+Martedì:
+- [10:00] Fisioterapia: Fisioterapia
+Mercoledì:
+- [21:00] Camomilla: Camomilla
+Giovedì:
+- (nessuna attività)
+Venerdì:
+- [08:00] Pillola A: Pillola A
+- [08:30] Pillola B: Pillola B
+Sabato:
+- (nessuna attività)
+Domenica:
+- (nessuna attività)
+
+
+==================== SCENARIO: 12_PATIENT_INFO ====================
+
+👤 USER: Quali sono le condizioni del paziente?
+🤖 BOT: Condizioni mediche: Il paziente non può bere latte a colazione, Il paziente ha il diabete di tipo 1, Il paziente non deve assumere liquidi per 24 ore.
+
+👤 USER: Quali sono le preferenze del paziente?
+🤖 BOT: Preferenze: Nessuna.
+
+👤 USER: Quali sono le abitudini del paziente?
+🤖 BOT: Abitudini: Nessuna.
+
+👤 USER: Quali sono le note del paziente?
+🤖 BOT: Note: Nessuna.
+
+==================== SCENARIO: 13_CAREGIVER_INFO ====================
+
+👤 USER: Quali sono le note del caregiver?
+🤖 BOT: Note caregiver: Quando dico 'sera' intendo le ore 21:00, La mia visita abituale è alle 18:00, Oggi visita anticipata alle 14:00, Quando dico Aulin intendo la forma granulare, Da oggi Aulin intendo la supposta.
+
+👤 USER: Quali sono le preferenze semantiche del caregiver?
+🤖 BOT: Preferenze semantiche: Nessuna.
+
+==================== SCENARIO: 14_TEMPORARY_ACTIVITY ====================
+
+👤 USER: Aggiungi attività 'Controllo pressione' martedì alle 09:00 per i prossimi 2 giorni
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Controllo pressione', 'description': 'Controllo pressione', 'days': ['Martedì', 'Mercoledì'], 'time': '09:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': '2026-01-15', 'valid_until': '2026-01-17', 'duration_days': 2}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Dimmi le attività di martedì
+🤖 BOT: Programma Martedì:
+- [10:00] Fisioterapia: Fisioterapia
+- [09:00] Controllo pressione: Controllo pressione
+
+
+==================== SCENARIO: 15_MISSING_FIELDS ====================
+
+👤 USER: Aggiungi attività 'Ossigenoterapia' mercoledì
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Ossigenoterapia', 'description': 'Ossigenoterapia', 'days': ['Mercoledì'], 'time': '08:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Alle 11:00
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Dimmi le attività di mercoledì
+🤖 BOT: Programma Mercoledì:
+- [21:00] Camomilla: Camomilla
+- [09:00] Controllo pressione: Controllo pressione
+- [08:00] Ossigenoterapia: Ossigenoterapia
+
+
+==================== SCENARIO: 16_DEPENDENCY_REMOVAL_WARNING ====================
+
+👤 USER: Aggiungi attività 'Colazione' giovedì alle 08:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Colazione', 'description': 'Colazione', 'days': ['Giovedì'], 'time': '08:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Avviso Semantico: SÌ: Paziente deve astenersi da liquidi per 24 ore e la colazione potrebbe implicare bevande..
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo (Forzata).
+
+👤 USER: Aggiungi attività 'Farmaco X' giovedì alle 08:30 con dipendenza Colazione
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Farmaco X', 'description': 'Farmaco X', 'days': ['Giovedì'], 'time': '08:30', 'dependencies': ['Colazione'], 'force': False, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Rimuovi attività 'Colazione' di giovedì
+🤖 BOT: Azione in sospeso: delete_activity con {'name': 'Colazione', 'day': 'Giovedì', 'force': False, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Annulla
+🤖 BOT: Azione annullata.
+
+==================== SCENARIO: 17_CAREGIVER_SEMANTIC_PREFS ====================
+
+👤 USER: Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': "Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00", 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+
+👤 USER: Quali sono le note del caregiver?
+🤖 BOT: Note caregiver: Quando dico 'sera' intendo le ore 21:00, La mia visita abituale è alle 18:00, Oggi visita anticipata alle 14:00, Quando dico Aulin intendo la forma granulare, Da oggi Aulin intendo la supposta, Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00.
+
+==================== SCENARIO: 18_WEEKLY_AFTER_EDITS ====================
+
+👤 USER: Dimmi le attività della settimana
+🤖 BOT: Programma settimanale:
+Lunedì:
+- [16:00] Lettura libro: Lettura libro
+- [18:00] Cyclette al chiuso: Cyclette al chiuso
+Martedì:
+- [10:00] Fisioterapia: Fisioterapia
+- [09:00] Controllo pressione: Controllo pressione
+Mercoledì:
+- [21:00] Camomilla: Camomilla
+- [09:00] Controllo pressione: Controllo pressione
+- [08:00] Ossigenoterapia: Ossigenoterapia
+Giovedì:
+- [08:00] Colazione: Colazione
+- [08:30] Farmaco X: Farmaco X
+Venerdì:
+- [08:00] Pillola A: Pillola A
+- [08:30] Pillola B: Pillola B
+Sabato:
+- (nessuna attività)
+Domenica:
+- (nessuna attività)
+
+
+==================== SCENARIO: 19_CONFLICT_CONCURRENT_ACTIVITY ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Aggiungi attività 'Fisioterapia' martedì alle 10:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Fisioterapia', 'description': 'Fisioterapia', 'days': ['Martedì'], 'time': '10:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Fisioterapia' (10:00) nei giorni {'Martedì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: Conferma
+🤖 BOT: Attività già presente.
+
+👤 USER: Aggiungi attività 'Visita infermieristica' martedì alle 10:30
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Visita infermieristica', 'description': 'Visita infermieristica', 'days': ['Martedì'], 'time': '10:30', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Avviso Semantico: SÌ: L'azione viola il vincolo di non assumere liquidi per 24 ore..
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: No
+🤖 BOT: Azione annullata.
+
+👤 USER: Dimmi le attività di martedì
+🤖 BOT: Programma Martedì:
+- [10:00] Fisioterapia: Fisioterapia
+- [09:00] Controllo pressione: Controllo pressione
+
+
+==================== SCENARIO: 20_DEPENDENCY_REMOVAL_CONFLICT ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Aggiungi attività 'Prendere pastiglia A' venerdì alle 08:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Prendere pastiglia A', 'description': 'Prendere pastiglia A', 'days': ['Venerdì'], 'time': '08:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Pillola A' (08:00) nei giorni {'Venerdì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo (Forzata).
+
+👤 USER: Aggiungi attività 'Prendere pastiglia B' venerdì alle 08:30 con dipendenza Prendere pastiglia A
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Prendere pastiglia B', 'description': 'Prendere pastiglia B', 'days': ['Venerdì'], 'time': '08:30', 'dependencies': ['Prendere pastiglia A'], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Pillola B' (08:30) nei giorni {'Venerdì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo (Forzata).
+
+👤 USER: Rimuovi attività 'Prendere pastiglia A' di venerdì
+🤖 BOT: Azione in sospeso: delete_activity con {'name': 'Prendere pastiglia A', 'day': 'Venerdì', 'force': False, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Annulla
+🤖 BOT: Azione annullata.
+
+==================== SCENARIO: 21_UPDATE_ACTIVITY_SUBSTITUTION ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Aggiungi attività 'Uscire a fare una camminata' lunedì alle 18:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Uscire a fare una camminata', 'description': 'Uscire a fare una camminata', 'days': ['Lunedì'], 'time': '18:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Cyclette al chiuso' (18:00) nei giorni {'Lunedì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo (Forzata).
+
+👤 USER: Sostituisci l'attività Uscire a fare una camminata di lunedì con 'Fare cyclette al chiuso' alle 18:00
+🤖 BOT: Azione in sospeso: modify_activity con {'old_name': 'Uscire a fare una camminata', 'day': 'Lunedì', 'new_name': 'Fare cyclette al chiuso', 'new_description': 'Fare cyclette al chiuso', 'new_time': '18:00', 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitti temporali: ["Conflitto temporale con 'Cyclette al chiuso' (18:00) nei giorni {'Lunedì'}"].
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: Conferma
+🤖 BOT: Attività 'Uscire a fare una camminata' modificata in 'Fare cyclette al chiuso' con successo.
+
+👤 USER: Dimmi le attività di lunedì
+🤖 BOT: Programma Lunedì:
+- [16:00] Lettura libro: Lettura libro
+- [18:00] Cyclette al chiuso: Cyclette al chiuso
+- [18:00] Fare cyclette al chiuso: Fare cyclette al chiuso
+
+
+==================== SCENARIO: 22_INDIRECT_CONFLICT ====================
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Il paziente non deve assumere liquidi per 24 ore
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'conditions', 'content': 'Il paziente non deve assumere liquidi per 24 ore', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Aggiungi attività 'Assunzione farmaci con acqua' lunedì alle 12:00
+🤖 BOT: Condizione medica già presente. e indicizzata.
+Azione in sospeso: add_activity con {'name': 'Assunzione farmaci con acqua', 'description': 'Assunzione farmaci con acqua', 'days': ['Lunedì'], 'time': '12:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Avviso Semantico: SÌ: Violazione del vincolo di non assumere liquidi per 24 ore..
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: No
+🤖 BOT: Azione annullata.
+
+👤 USER: Dimmi le attività di lunedì
+🤖 BOT: Programma Lunedì:
+- [16:00] Lettura libro: Lettura libro
+- [18:00] Cyclette al chiuso: Cyclette al chiuso
+- [18:00] Fare cyclette al chiuso: Fare cyclette al chiuso
+
+
+==================== SCENARIO: 23_SEMANTIC_AMBIGUITY ====================
+
+👤 USER: Quando dico Aulin intendo la forma granulare
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'Quando dico Aulin intendo la forma granulare', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota già presente (duplicato ignorato). e indicizzata.
+
+👤 USER: Ora Aulin intendo la supposta
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'Ora Aulin intendo la supposta', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+
+👤 USER: Quali sono le note del caregiver?
+🤖 BOT: Note caregiver: Quando dico 'sera' intendo le ore 21:00, La mia visita abituale è alle 18:00, Oggi visita anticipata alle 14:00, Quando dico Aulin intendo la forma granulare, Da oggi Aulin intendo la supposta, Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00, Ora Aulin intendo la supposta.
+
+==================== SCENARIO: 24_CAREGIVER_ROUTINE_CHANGE ====================
+
+👤 USER: La mia visita abituale è alle 18:00
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'La mia visita abituale è alle 18:00', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota già presente (duplicato ignorato). e indicizzata.
+
+👤 USER: Domani visita anticipata alle 14:00
+🤖 BOT: Azione in sospeso: save_knowledge con {'category': 'caregiver', 'content': 'Domani visita anticipata alle 14:00', 'day': None, 'confirm': True}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Salva questa informazione
+🤖 BOT: Nota salvata correttamente (Giorno: Sempre). e indicizzata.
+
+👤 USER: Quali sono le note del caregiver?
+🤖 BOT: Note caregiver: Quando dico 'sera' intendo le ore 21:00, La mia visita abituale è alle 18:00, Oggi visita anticipata alle 14:00, Quando dico Aulin intendo la forma granulare, Da oggi Aulin intendo la supposta, Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00, Ora Aulin intendo la supposta, Domani visita anticipata alle 14:00.

@@ -1,0 +1,45 @@
+KMChat LLM Crash Test - 2026-01-07T13:47:26.831474
+Model FAST: llama3.2:3b
+Model SMART: llama3.2:3b
+Total prompts: 3
+
+================================================================================
+PROMPT 1
+--------------------------------------------------------------------------------
+Cambia contesto su paziente demo_giuseppe e caregiver caregiver_01.
+
+================================================================================
+REPLY 1
+--------------------------------------------------------------------------------
+🔌 Init Models... FAST: llama3.2:3b, SMART: llama3.2:3b
+
+🧪 Test: Cambia contesto su paziente demo_giuseppe e caregiver caregiver_01.
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+
+KMChat: Error: timed out
+
+================================================================================
+PROMPT 2
+--------------------------------------------------------------------------------
+Mostrami le attività di Lunedì
+
+================================================================================
+REPLY 2
+--------------------------------------------------------------------------------
+🔌 Init Models... FAST: llama3.2:3b, SMART: llama3.2:3b
+
+🧪 Test: Mostrami le attività di Lunedì
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+
+================================================================================
+PROMPT 3
+--------------------------------------------------------------------------------
+Consulta le linee guida della terapia del paziente
+
+================================================================================
+REPLY 3
+--------------------------------------------------------------------------------
+🔌 Init Models... FAST: llama3.2:3b, SMART: llama3.2:3b
+
+🧪 Test: Consulta le linee guida della terapia del paziente
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.

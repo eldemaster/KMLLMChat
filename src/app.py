@@ -30,7 +30,7 @@ st.set_page_config(
 )
 
 # --- COSTANTI & STATO ---
-MODEL_NAME = "llama3.1"
+MODEL_NAME = "kmchat-14b"
 DB_DIR = "data"
 logger = setup_logger("app", "app")
 
@@ -41,13 +41,21 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "assistant", "content": "Ciao! Sono KMChat. Come posso aiutarti con la gestione della terapia oggi?"}
     ]
+if "pending_action" not in st.session_state:
+    st.session_state.pending_action = None
 
 # --- DEFINIZIONE TOOLS (Adattati per Streamlit) ---
 # Nota: Li ridefiniamo qui per garantire accesso allo stato della sessione se necessario
 
-def add_activity_tool(name: str, description: str, days: list, time: str) -> str:
+def add_activity_tool(name: str, description: str, days: list, time: str, confirm: bool = False) -> str:
     """Aggiunge una nuova attività alla terapia."""
     try:
+        if not confirm:
+            st.session_state.pending_action = {
+                "tool": "add_activity",
+                "args": {"name": name, "description": description, "days": days, "time": time, "confirm": True},
+            }
+            return "Azione in sospeso. Scrivi 'conferma' per applicare o 'annulla' per annullare."
         import time as t_lib
         act_id = f"act_{int(t_lib.time())}"
         new_activity = Activity(
@@ -68,6 +76,23 @@ def get_schedule_tool(day: str) -> str:
     for act in activities:
         output += f"- [{act.time}] {act.name}\n"
     return output
+
+def confirm_action_tool() -> str:
+    pending = st.session_state.pending_action
+    if not pending:
+        return "Nessuna azione in sospeso."
+    st.session_state.pending_action = None
+    tool = pending.get("tool")
+    args = pending.get("args", {})
+    if tool == "add_activity":
+        return add_activity_tool(**args)
+    return "Azione non valida."
+
+def cancel_action_tool() -> str:
+    if not st.session_state.pending_action:
+        return "Nessuna azione in sospeso."
+    st.session_state.pending_action = None
+    return "Azione annullata."
 
 def run_agent_sync(agent, prompt: str):
     """Esegue l'agente ReAct in modo sincrono partendo da un prompt."""
@@ -107,11 +132,13 @@ def get_agent():
     # 3. Logic Tools
     schedule_tool = FunctionTool.from_defaults(fn=get_schedule_tool)
     add_tool = FunctionTool.from_defaults(fn=add_activity_tool)
+    confirm_tool = FunctionTool.from_defaults(fn=confirm_action_tool)
+    cancel_tool = FunctionTool.from_defaults(fn=cancel_action_tool)
 
     # 4. Agente
     logger.info("Agente inizializzato (UI) con modello %s", MODEL_NAME)
     return ReActAgent(
-        tools=[rag_tool, schedule_tool, add_tool],
+        tools=[rag_tool, schedule_tool, add_tool, confirm_tool, cancel_tool],
         llm=llm,
         verbose=True,
         streaming=False,
@@ -119,6 +146,7 @@ def get_agent():
 Usa 'get_schedule_tool' prima di aggiungere attività.
 Usa 'consult_guidelines' per domande mediche.
 Se rilevi conflitti, avvisa l'utente.
+Richiedi conferma prima di modificare i dati; l'utente può dire 'conferma' o 'annulla'.
 Parla Italiano."""
     )
 

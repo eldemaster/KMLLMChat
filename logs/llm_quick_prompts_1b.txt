@@ -1,0 +1,5 @@
+Cambia contesto su paziente demo_giuseppe e caregiver caregiver_01.
+Mostrami le attività di Lunedì
+Consulta le linee guida della terapia del paziente
+Il paziente ha diabete
+conferma

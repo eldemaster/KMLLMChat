@@ -1,0 +1,143 @@
+{
+    "patient_id": "mario_rossi",
+    "activities": [
+        {
+            "activity_id": "mr_001",
+            "name": "Colazione leggera",
+            "description": "Colazione con yogurt e frutta",
+            "day_of_week": [
+                "Lunedì",
+                "Mercoledì",
+                "Venerdì"
+            ],
+            "time": "08:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "mr_002",
+            "name": "Misurazione glicemia",
+            "description": "Misurare glicemia a digiuno",
+            "day_of_week": [
+                "Lunedì",
+                "Mercoledì",
+                "Venerdì"
+            ],
+            "time": "07:30",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "mr_003",
+            "name": "Camminata mattutina",
+            "description": "Passeggiata di 20 minuti",
+            "day_of_week": [
+                "Martedì",
+                "Giovedì"
+            ],
+            "time": "09:30",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1768426632",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768427075",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768427518",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768427963",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768428412",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768428961",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768429201",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-16"
+        },
+        {
+            "activity_id": "temp_1768466643",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì",
+                "Mercoledì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-15",
+            "valid_until": "2026-01-17"
+        }
+    ]
+}

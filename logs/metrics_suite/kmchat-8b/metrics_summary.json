@@ -1,0 +1,1237 @@
+{
+  "model": "kmchat-8b",
+  "runs": [
+    {
+      "run": 1,
+      "total_steps": 50,
+      "avg_latency_ms": 4366.982169137336,
+      "per_metric": {
+        "tool_call": {
+          "hit": 11,
+          "total": 23
+        },
+        "knowledge": {
+          "hit": 0,
+          "total": 6
+        },
+        "rag": {
+          "hit": 2,
+          "total": 3
+        },
+        "conflict": {
+          "hit": 2,
+          "total": 2
+        },
+        "confirmation": {
+          "hit": 8,
+          "total": 8
+        },
+        "schedule": {
+          "hit": 0,
+          "total": 8
+        }
+      },
+      "misses": [
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "FANS non consentiti per il paziente",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Ok",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Attivit\u00e0 aggiunta con successo (Forzata)."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "Intendo sera alle 21:00",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Per favore, specifica il giorno della settimana per confermare l'orario."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "S\u00ec",
+          "expected": [
+            "salvata",
+            "indicizzata"
+          ],
+          "output": "Nessuna azione in sospeso."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Metti Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Che attivit\u00e0 ha il gioved\u00ec?",
+          "expected": [
+            "Mobilizzazione articolare"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Imposta Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Dimmi le attivit\u00e0 di venerd\u00ec",
+          "expected": [
+            "Colazione leggera"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il paziente Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il caregiver Maria Rossi",
+          "expected": [
+            "Maria Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Quali attivit\u00e0 ci sono mercoled\u00ec?",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Nessuna attivit\u00e0 per Mercoled\u00f0."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Imposta paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Contesto aggiornato: Paolo Verdi, Maria Rossi."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Programma del marted\u00ec",
+          "expected": [
+            "Controllo pressione"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Usa paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Scegli caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Attivit\u00e0 previste per luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Seleziona il paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Passa al caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Programma del luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Seleziona Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Contesto aggiornato: Paolo Verdi, Maria Rossi."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Quali attivit\u00e0 ci sono marted\u00ec?",
+          "expected": [
+            "Controllo pressione"
+          ],
+          "output": "Nessuna attivit\u00e0 per Marted\u00f2."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Attivit\u00e0 previste per mercoled\u00ec",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Da oggi il paziente non deve assumere FANS",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "S\u00ec, salva",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Debug RAG: FANS vietati",
+          "expected": [
+            "FANS"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "total_steps": 50,
+      "avg_latency_ms": 4307.983336623292,
+      "per_metric": {
+        "tool_call": {
+          "hit": 13,
+          "total": 23
+        },
+        "knowledge": {
+          "hit": 0,
+          "total": 6
+        },
+        "rag": {
+          "hit": 2,
+          "total": 3
+        },
+        "conflict": {
+          "hit": 2,
+          "total": 2
+        },
+        "confirmation": {
+          "hit": 8,
+          "total": 8
+        },
+        "schedule": {
+          "hit": 1,
+          "total": 8
+        }
+      },
+      "misses": [
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "FANS non consentiti per il paziente",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Ok",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Attivit\u00e0 aggiunta con successo (Forzata)."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "Intendo sera alle 21:00",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Per favore, specifica il giorno della settimana per la tua intenzione di andare a letto. Ad esempio, 'oggi', 'domani' o 'mercoled\u00ec'. Se vuoi impostare un orario fisso, puoi anche specificarlo."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "S\u00ec",
+          "expected": [
+            "salvata",
+            "indicizzata"
+          ],
+          "output": "Nessuna azione in sospeso."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Metti Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Che attivit\u00e0 ha il gioved\u00ec?",
+          "expected": [
+            "Mobilizzazione articolare"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Imposta Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Dimmi le attivit\u00e0 di venerd\u00ec",
+          "expected": [
+            "Colazione leggera"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il paziente Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il caregiver Maria Rossi",
+          "expected": [
+            "Maria Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Quali attivit\u00e0 ci sono mercoled\u00ec?",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Nessuna attivit\u00e0 per Mercoled\u00f0."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Programma del marted\u00ec",
+          "expected": [
+            "Controllo pressione"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Usa paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Scegli caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Attivit\u00e0 previste per luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Seleziona il paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Passa al caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Programma del luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Attivit\u00e0 previste per mercoled\u00ec",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Da oggi il paziente non deve assumere FANS",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "S\u00ec, salva",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Debug RAG: FANS vietati",
+          "expected": [
+            "FANS"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "total_steps": 50,
+      "avg_latency_ms": 4289.321869933046,
+      "per_metric": {
+        "tool_call": {
+          "hit": 13,
+          "total": 23
+        },
+        "knowledge": {
+          "hit": 0,
+          "total": 6
+        },
+        "rag": {
+          "hit": 2,
+          "total": 3
+        },
+        "conflict": {
+          "hit": 2,
+          "total": 2
+        },
+        "confirmation": {
+          "hit": 8,
+          "total": 8
+        },
+        "schedule": {
+          "hit": 1,
+          "total": 8
+        }
+      },
+      "misses": [
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "FANS non consentiti per il paziente",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Ok",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Attivit\u00e0 aggiunta con successo (Forzata)."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "Intendo sera alle 21:00",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Per me, intendo che vuoi sapere l'orario della tua attivit\u00e0 per la sera. Quindi, \u00e8 corretto? Vuoi confermare?"
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "S\u00ec",
+          "expected": [
+            "salvata",
+            "indicizzata"
+          ],
+          "output": "Nessuna azione in sospeso."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Metti Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Che attivit\u00e0 ha il gioved\u00ec?",
+          "expected": [
+            "Mobilizzazione articolare"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Imposta Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Dimmi le attivit\u00e0 di venerd\u00ec",
+          "expected": [
+            "Colazione leggera"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il paziente Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il caregiver Maria Rossi",
+          "expected": [
+            "Maria Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Quali attivit\u00e0 ci sono mercoled\u00ec?",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Nessuna attivit\u00e0 per Mercoled\u00f0."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Programma del marted\u00ec",
+          "expected": [
+            "Controllo pressione"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Usa paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Scegli caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Attivit\u00e0 previste per luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Seleziona il paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Passa al caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Programma del luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Attivit\u00e0 previste per mercoled\u00ec",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Da oggi il paziente non deve assumere FANS",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "S\u00ec, salva",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Debug RAG: FANS vietati",
+          "expected": [
+            "FANS"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        }
+      ]
+    },
+    {
+      "run": 4,
+      "total_steps": 50,
+      "avg_latency_ms": 4349.819816669915,
+      "per_metric": {
+        "tool_call": {
+          "hit": 11,
+          "total": 23
+        },
+        "knowledge": {
+          "hit": 0,
+          "total": 6
+        },
+        "rag": {
+          "hit": 2,
+          "total": 3
+        },
+        "conflict": {
+          "hit": 2,
+          "total": 2
+        },
+        "confirmation": {
+          "hit": 8,
+          "total": 8
+        },
+        "schedule": {
+          "hit": 0,
+          "total": 8
+        }
+      },
+      "misses": [
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "FANS non consentiti per il paziente",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Ok",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Attivit\u00e0 aggiunta con successo (Forzata)."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "Intendo sera alle 21:00",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Per favore, specifica il giorno della settimana per la tua intenzione di andare a letto. Ad esempio, 'sera di luned\u00ec' o 'sera di mercoled\u00ec'."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "S\u00ec",
+          "expected": [
+            "salvata",
+            "indicizzata"
+          ],
+          "output": "Nessuna azione in sospeso."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Metti Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Che attivit\u00e0 ha il gioved\u00ec?",
+          "expected": [
+            "Mobilizzazione articolare"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Imposta Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Dimmi le attivit\u00e0 di venerd\u00ec",
+          "expected": [
+            "Colazione leggera"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il paziente Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il caregiver Maria Rossi",
+          "expected": [
+            "Maria Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Quali attivit\u00e0 ci sono mercoled\u00ec?",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Nessuna attivit\u00e0 per Mercoled\u00f0."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Imposta paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Contesto aggiornato: Paolo Verdi, Maria Rossi."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Programma del marted\u00ec",
+          "expected": [
+            "Controllo pressione"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Usa paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Scegli caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Attivit\u00e0 previste per luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Seleziona il paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Passa al caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Programma del luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Seleziona Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Contesto aggiornato: Paolo Verdi, Maria Rossi."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Quali attivit\u00e0 ci sono marted\u00ec?",
+          "expected": [
+            "Controllo pressione"
+          ],
+          "output": "Nessuna attivit\u00e0 per Marted\u00f2."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Attivit\u00e0 previste per mercoled\u00ec",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Da oggi il paziente non deve assumere FANS",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "S\u00ec, salva",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Debug RAG: FANS vietati",
+          "expected": [
+            "FANS"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        }
+      ]
+    },
+    {
+      "run": 5,
+      "total_steps": 50,
+      "avg_latency_ms": 4262.103805057704,
+      "per_metric": {
+        "tool_call": {
+          "hit": 11,
+          "total": 23
+        },
+        "knowledge": {
+          "hit": 0,
+          "total": 6
+        },
+        "rag": {
+          "hit": 2,
+          "total": 3
+        },
+        "conflict": {
+          "hit": 2,
+          "total": 2
+        },
+        "confirmation": {
+          "hit": 8,
+          "total": 8
+        },
+        "schedule": {
+          "hit": 0,
+          "total": 8
+        }
+      },
+      "misses": [
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "FANS non consentiti per il paziente",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Ok",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Attivit\u00e0 aggiunta con successo (Forzata)."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "Intendo sera alle 21:00",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Per favore, specifica il giorno della settimana per la tua intenzione di andare a letto. Ad esempio, 'sera di luned\u00ec' o 'sera di mercoled\u00ec'."
+        },
+        {
+          "scenario": "CAREGIVER_PREFS",
+          "user": "S\u00ec",
+          "expected": [
+            "salvata",
+            "indicizzata"
+          ],
+          "output": "Nessuna azione in sospeso."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Metti Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Che attivit\u00e0 ha il gioved\u00ec?",
+          "expected": [
+            "Mobilizzazione articolare"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Imposta Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "SWITCH_AND_QUERY",
+          "user": "Dimmi le attivit\u00e0 di venerd\u00ec",
+          "expected": [
+            "Colazione leggera"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il paziente Paolo Verdi",
+          "expected": [
+            "Contesto aggiornato: Paolo Verdi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Imposta il caregiver Maria Rossi",
+          "expected": [
+            "Maria Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Quali attivit\u00e0 ci sono mercoled\u00ec?",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Nessuna attivit\u00e0 per Mercoled\u00f0."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Imposta paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Contesto aggiornato: Paolo Verdi, Maria Rossi."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Programma del marted\u00ec",
+          "expected": [
+            "Controllo pressione"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Usa paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Scegli caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Attivit\u00e0 previste per luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Seleziona il paziente Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Passa al caregiver Andrea Bianchi",
+          "expected": [
+            "Andrea Bianchi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_BASE",
+          "user": "Programma del luned\u00ec",
+          "expected": [
+            "Programma Luned\u00ec"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Seleziona Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Contesto aggiornato: Paolo Verdi, Maria Rossi."
+        },
+        {
+          "scenario": "MARIO_TEMPORARY",
+          "user": "Quali attivit\u00e0 ci sono marted\u00ec?",
+          "expected": [
+            "Controllo pressione"
+          ],
+          "output": "Nessuna attivit\u00e0 per Marted\u00f2."
+        },
+        {
+          "scenario": "PAOLO_TEMP",
+          "user": "Attivit\u00e0 previste per mercoled\u00ec",
+          "expected": [
+            "Controllo fisioterapico"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Usa Mario Rossi",
+          "expected": [
+            "Contesto aggiornato: Mario Rossi"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Da oggi il paziente non deve assumere FANS",
+          "expected": [
+            "Azione in sospeso: save_knowledge"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "S\u00ec, salva",
+          "expected": [
+            "salvata"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        },
+        {
+          "scenario": "KNOWLEDGE_RAG",
+          "user": "Debug RAG: FANS vietati",
+          "expected": [
+            "FANS"
+          ],
+          "output": "Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "per_metric": {
+      "tool_call": {
+        "hit": 59,
+        "total": 115
+      },
+      "knowledge": {
+        "hit": 0,
+        "total": 30
+      },
+      "rag": {
+        "hit": 10,
+        "total": 15
+      },
+      "conflict": {
+        "hit": 10,
+        "total": 10
+      },
+      "confirmation": {
+        "hit": 40,
+        "total": 40
+      },
+      "schedule": {
+        "hit": 2,
+        "total": 40
+      }
+    },
+    "total_steps": 250,
+    "avg_latency_ms": 4315.242199484259
+  }
+}

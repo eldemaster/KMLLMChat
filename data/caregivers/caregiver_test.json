@@ -1,0 +1,48 @@
+{
+    "caregiver_id": "caregiver_test",
+    "name": "Andrea",
+    "role": null,
+    "semantic_preferences": [],
+    "notes": [
+        {
+            "content": "Quando dico 'sera' intendo le ore 21:00",
+            "day": null,
+            "created_at": "2026-01-15T09:07:18.551031"
+        },
+        {
+            "content": "La mia visita abituale è alle 18:00",
+            "day": null,
+            "created_at": "2026-01-15T09:15:10.204845"
+        },
+        {
+            "content": "Oggi visita anticipata alle 14:00",
+            "day": null,
+            "created_at": "2026-01-15T09:15:33.360236"
+        },
+        {
+            "content": "Quando dico Aulin intendo la forma granulare",
+            "day": null,
+            "created_at": "2026-01-15T09:16:16.240532"
+        },
+        {
+            "content": "Da oggi Aulin intendo la supposta",
+            "day": null,
+            "created_at": "2026-01-15T09:16:38.485875"
+        },
+        {
+            "content": "Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00",
+            "day": null,
+            "created_at": "2026-01-15T09:23:32.406726"
+        },
+        {
+            "content": "Ora Aulin intendo la supposta",
+            "day": null,
+            "created_at": "2026-01-15T09:32:16.985455"
+        },
+        {
+            "content": "Domani visita anticipata alle 14:00",
+            "day": null,
+            "created_at": "2026-01-15T09:33:24.472960"
+        }
+    ]
+}

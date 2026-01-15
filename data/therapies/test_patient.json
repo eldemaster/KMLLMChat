@@ -1,0 +1,43 @@
+{
+    "patient_id": "test_patient",
+    "activities": [
+        {
+            "activity_id": "act_001",
+            "name": "Fisioterapia",
+            "description": "Esercizi gambe",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "10:00-11:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "act_002",
+            "name": "Prendere pastiglia A",
+            "description": "Antipertensivo",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "08:00",
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "act_003",
+            "name": "Prendere pastiglia B",
+            "description": "Integratore",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "08:30",
+            "dependencies": [
+                "Prendere pastiglia A"
+            ],
+            "valid_from": null,
+            "valid_until": null
+        }
+    ]
+}

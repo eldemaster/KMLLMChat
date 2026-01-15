@@ -1,0 +1,14 @@
+KMChat LLM Crash Test - 2026-01-07T00:01:18.626797
+Model FAST: llama3.2:3b
+Model SMART: llama3.2:3b
+Total prompts: 1
+
+================================================================================
+PROMPT 1
+--------------------------------------------------------------------------------
+Aggiungi attività Controllo pressione lunedì alle 09:00
+
+================================================================================
+REPLY 1
+--------------------------------------------------------------------------------
+Certo! Ho aggiunto l'attività "Controllo pressione" per lunedì alle 09:00. Continuo? (Forza=True)

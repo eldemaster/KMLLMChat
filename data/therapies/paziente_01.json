@@ -1,0 +1,19 @@
+{
+    "patient_id": "paziente_01",
+    "activities": [
+        {
+            "activity_id": "temp_1768417702",
+            "name": "Controllo fisioterapico",
+            "description": "Controllo fisioterapico",
+            "day_of_week": [
+                "Mercoledì",
+                "Giovedì",
+                "Venerdì"
+            ],
+            "time": "11:00",
+            "dependencies": [],
+            "valid_from": "2026-01-14",
+            "valid_until": "2026-01-17"
+        }
+    ]
+}

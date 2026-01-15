@@ -1,0 +1,9 @@
+{
+  "caregiver_id": "andrea_bianchi",
+  "name": "Andrea Bianchi",
+  "role": "Infermiere",
+  "semantic_preferences": ["Quando dico 'sera' intendo le 21:00"],
+  "notes": [
+    {"content": "Preferisce istruzioni concise", "day": null, "created_at": "2026-01-14T10:10:00"}
+  ]
+}

@@ -1,9 +1,0 @@
-{
-    "caregiver_id": "caregiver_01",
-    "name": "Anna Verdi",
-    "role": "Inferimiera Domiciliare",
-    "semantic_preferences": [
-        "Quando dico 'Aulin' intendo la forma granulare, salvo diversa indicazione",
-        "Per 'mattina' intendo l'intervallo tra le 08:00 e le 10:00"
-    ]
-}

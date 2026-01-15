@@ -1,0 +1,54 @@
+KM + RAG smoke test
+
+== Context switch (demo_giuseppe) ==
+Contesto aggiornato: Giuseppe Rossi, Maria Rossi.
+
+== Schedule Lunedì (before) ==
+Programma Lunedì:
+- [08:00] Take Heart Meds: Beta-blockers
+- [09:00-09:30] Light Walk: Slow walking in the park
+- [13:00] Passeggiata: Passeggiata
+- [120:00] Passeggiata: Passeggiata
+- [12:45] Passeggiata Test: Passeggiata breve
+
+
+== Add activity (force+confirm) ==
+Attività aggiunta con successo (Forzata).
+
+== Modify activity (force+confirm) ==
+Attività 'Passeggiata Test' modificata in 'Passeggiata Test' con successo.
+
+== Schedule Lunedì (after) ==
+Programma Lunedì:
+- [08:00] Take Heart Meds: Beta-blockers
+- [09:00-09:30] Light Walk: Slow walking in the park
+- [13:00] Passeggiata: Passeggiata
+- [120:00] Passeggiata: Passeggiata
+- [12:45] Passeggiata Test: Passeggiata breve
+- [12:15] Passeggiata Test: Passeggiata breve
+
+
+== Context switch (paziente_02) ==
+Contesto aggiornato: Luigi Verdi, Maria Rossi.
+
+== Schedule Lunedì (paziente_02) ==
+Programma Lunedì:
+- [08:00] Terapia Conservativa: Niente operazione
+
+
+== RAG retrieval (raw retriever) ==
+1. score=0.4624 text=Attività: Esercizi cognitivi
+Descrizione: Leggere un libro, oppure fare gli esercizi proposti dalla psicologa
+Giorni: Lunedì, Martedì, Giovedì, Venerdì
+Orario: 10:00-10:30
+Dipendenze: Nessuna
+2. score=0.4258 text=Attività: Riabilitazione ginocchio
+Descrizione: Fare gli esercizi con il fisioterapista per il ginocchio
+Giorni: Martedì, Giovedì, Venerdì
+Orario: 09:00-09:30
+Dipendenze: Nessuna
+3. score=0.4190 text=Attività: Passeggiata Test
+Descrizione: Passeggiata breve
+Giorni: Lunedì
+Orario: 12:15
+Dipendenze: Nessuna

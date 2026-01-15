@@ -1,0 +1,19 @@
+{
+    "patient_id": "federico_01",
+    "name": "Federico",
+    "medical_conditions": [
+        "Artrosi ginocchio"
+    ],
+    "preferences": [
+        "Esercizi leggeri al mattino"
+    ],
+    "habits": [
+        "Beve acqua a piccoli sorsi durante la giornata"
+    ],
+    "notes": [
+        {
+            "content": "Evitare sforzi dopo le 20:00",
+            "day": null
+        }
+    ]
+}

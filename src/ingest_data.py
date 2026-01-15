@@ -1,97 +1,229 @@
 import json
 from pathlib import Path
-from typing import List
+from typing import Iterable
 
 from llama_index.core import Document, VectorStoreIndex, Settings, StorageContext
-from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
 import chromadb
 
-from src.models import Activity, Therapy
 
-# Dati di esempio basati sul PDF "Progetto Digital Transformation - Alessandro De Martini.pdf"
-# Rappresentano la terapia di un paziente con diverse attività.
-sample_therapy_data = [
-    {
-        "activity_id": "act_001",
-        "name": "Assunzione Aulin",
-        "description": "Assumi l\'Aulin con acqua",
-        "day_of_week": ["Lunedì", "Mercoledì", "Venerdì"],
-        "time": "08:00",
-        "dependencies": ["Colazione"]
-    },
-    {
-        "activity_id": "act_002",
-        "name": "Riabilitazione ginocchio",
-        "description": "Fare gli esercizi con il fisioterapista per il ginocchio",
-        "day_of_week": ["Martedì", "Giovedì", "Venerdì"],
-        "time": "09:00-09:30",
-        "dependencies": []
-    },
-    {
-        "activity_id": "act_003",
-        "name": "Esercizi cognitivi",
-        "description": "Leggere un libro, oppure fare gli esercizi proposti dalla psicologa",
-        "day_of_week": ["Lunedì", "Martedì", "Giovedì", "Venerdì"],
-        "time": "10:00-10:30",
-        "dependencies": []
-    }
-]
+DATA_DIR = Path("data")
+COLLECTION_NAME = "patient_therapies"
 
-def ingest_data(output_dir: str = "data"):
-    """
-    Ingests sample therapy data into a ChromaDB vector store using LlamaIndex.
-    Configures LlamaIndex to use Ollama for LLM and embeddings.
-    """
-    Path(output_dir).mkdir(parents=True, exist_ok=True)
-    
-    # Configure Ollama as the default LLM and embedding model for LlamaIndex
-    # Ensure Ollama server is running and both models are available locally
-    Settings.llm = Ollama(model="llama3.1", request_timeout=120.0)
-    Settings.embed_model = OllamaEmbedding(model_name="nomic-embed-text")
 
-    # Transform sample data into LlamaIndex Document objects
-    documents: List[Document] = []
-    for activity_data in sample_therapy_data:
-        activity = Activity(**activity_data)
-        # We store each activity as a separate document for fine-grained retrieval
-        document_text = f"Attività: {activity.name}\nDescrizione: {activity.description}\nGiorni: {', '.join(activity.day_of_week)}\nOrario: {activity.time}\nDipendenze: {', '.join(activity.dependencies) if activity.dependencies else 'Nessuna'}"
-        documents.append(Document(text=document_text, metadata={"activity_id": activity.activity_id, "name": activity.name}))
-
-    # Initialize ChromaDB client and collection
-    db = chromadb.PersistentClient(path=str(Path(output_dir) / "chroma_db"))
-    
-    # Using a simple collection name, can be made dynamic
-    collection_name = "patient_therapies"
-    
-    # Delete the collection if it already exists to ensure a clean slate
+def _load_json(path: Path):
     try:
-        db.delete_collection(name=collection_name)
-        print(f"Collezione '{collection_name}' eliminata (se esistente).")
-    except Exception as e:
-        print(f"Errore durante l'eliminazione della collezione '{collection_name}': {e} (potrebbe non esistere, procedo).")
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
 
-    chroma_collection = db.get_or_create_collection(collection_name)
-    
-    # Initialize ChromaVectorStore
+
+def _build_activity_doc(activity: dict, patient_id: str) -> Document | None:
+    name = activity.get("name")
+    if not name:
+        return None
+    description = activity.get("description") or ""
+    days = activity.get("day_of_week") or []
+    time = activity.get("time") or ""
+    dependencies = activity.get("dependencies") or []
+    valid_from = activity.get("valid_from")
+    valid_until = activity.get("valid_until")
+
+    lines = [
+        f"Attività: {name}",
+        f"Descrizione: {description}",
+        f"Giorni: {', '.join(days)}",
+        f"Orario: {time}",
+        f"Dipendenze: {', '.join(dependencies) if dependencies else 'Nessuna'}",
+    ]
+    if valid_from:
+        lines.append(f"Validità dal: {valid_from}")
+    if valid_until:
+        lines.append(f"Validità fino al: {valid_until}")
+
+    meta = {
+        "type": "therapy_activity",
+        "source": "therapy_json",
+        "patient_id": patient_id,
+        "activity_id": activity.get("activity_id"),
+    }
+    return Document(text="\n".join(lines), metadata=meta)
+
+
+def _iter_therapy_docs() -> Iterable[Document]:
+    therapy_dir = DATA_DIR / "therapies"
+    if not therapy_dir.exists():
+        return []
+
+    docs: list[Document] = []
+    for path in therapy_dir.glob("*.json"):
+        data = _load_json(path)
+        if not data:
+            continue
+        if isinstance(data, dict) and "activities" in data:
+            activities = data.get("activities") or []
+            patient_id = data.get("patient_id") or path.stem
+        elif isinstance(data, list):
+            activities = data
+            patient_id = path.stem
+        else:
+            continue
+
+        for activity in activities:
+            if not isinstance(activity, dict):
+                continue
+            doc = _build_activity_doc(activity, patient_id)
+            if doc:
+                docs.append(doc)
+    return docs
+
+
+def _iter_patient_docs() -> Iterable[Document]:
+    patient_dir = DATA_DIR / "patients"
+    if not patient_dir.exists():
+        return []
+
+    docs: list[Document] = []
+    for path in patient_dir.glob("*.json"):
+        data = _load_json(path)
+        if not data or not isinstance(data, dict):
+            continue
+        patient_id = data.get("patient_id") or path.stem
+        for cond in data.get("medical_conditions") or []:
+            docs.append(
+                Document(
+                    text=f"[Always] {cond}",
+                    metadata={
+                        "type": "patient_condition",
+                        "category": "conditions",
+                        "source": "patient_profile",
+                        "patient_id": patient_id,
+                    },
+                )
+            )
+        for pref in data.get("preferences") or []:
+            docs.append(
+                Document(
+                    text=f"[Always] {pref}",
+                    metadata={
+                        "type": "patient_preference",
+                        "category": "preferences",
+                        "source": "patient_profile",
+                        "patient_id": patient_id,
+                    },
+                )
+            )
+        for habit in data.get("habits") or []:
+            docs.append(
+                Document(
+                    text=f"[Always] {habit}",
+                    metadata={
+                        "type": "patient_habit",
+                        "category": "habits",
+                        "source": "patient_profile",
+                        "patient_id": patient_id,
+                    },
+                )
+            )
+        for note in data.get("notes") or []:
+            if not isinstance(note, dict):
+                continue
+            content = note.get("content")
+            if not content:
+                continue
+            day = note.get("day")
+            label = day or "Always"
+            docs.append(
+                Document(
+                    text=f"[{label}] {content}",
+                    metadata={
+                        "type": "patient_note",
+                        "category": "notes",
+                        "source": "patient_profile",
+                        "patient_id": patient_id,
+                    },
+                )
+            )
+    return docs
+
+
+def _iter_caregiver_docs() -> Iterable[Document]:
+    caregiver_dir = DATA_DIR / "caregivers"
+    if not caregiver_dir.exists():
+        return []
+
+    docs: list[Document] = []
+    for path in caregiver_dir.glob("*.json"):
+        data = _load_json(path)
+        if not data or not isinstance(data, dict):
+            continue
+        caregiver_id = data.get("caregiver_id") or path.stem
+        for pref in data.get("semantic_preferences") or []:
+            docs.append(
+                Document(
+                    text=f"[Always] {pref}",
+                    metadata={
+                        "type": "caregiver_preference",
+                        "category": "caregiver",
+                        "source": "caregiver_profile",
+                        "caregiver_id": caregiver_id,
+                    },
+                )
+            )
+        for note in data.get("notes") or []:
+            if not isinstance(note, dict):
+                continue
+            content = note.get("content")
+            if not content:
+                continue
+            day = note.get("day")
+            label = day or "Always"
+            docs.append(
+                Document(
+                    text=f"[{label}] {content}",
+                    metadata={
+                        "type": "caregiver_note",
+                        "category": "caregiver",
+                        "source": "caregiver_profile",
+                        "caregiver_id": caregiver_id,
+                    },
+                )
+            )
+    return docs
+
+
+def ingest_data(output_dir: str = "data") -> VectorStoreIndex:
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+
+    Settings.embed_model = OllamaEmbedding(model_name="nomic-embed-text")
+    Settings.chunk_size = 512
+    Settings.chunk_overlap = 50
+
+    documents: list[Document] = []
+    documents.extend(list(_iter_therapy_docs()))
+    documents.extend(list(_iter_patient_docs()))
+    documents.extend(list(_iter_caregiver_docs()))
+
+    db = chromadb.PersistentClient(path=str(Path(output_dir) / "chroma_db"))
+    try:
+        db.delete_collection(name=COLLECTION_NAME)
+        print(f"Collezione '{COLLECTION_NAME}' resettata.")
+    except Exception:
+        pass
+
+    chroma_collection = db.get_or_create_collection(COLLECTION_NAME)
     vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
-    
-    # Wrap the vector store in a StorageContext
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
-    
-    # Create a VectorStoreIndex from the documents
-    # This will generate embeddings for the documents and store them in ChromaDB
-    print("Creazione dell\'indice vettoriale e popolamento di ChromaDB...")
+
+    print(f"Indicizzazione di {len(documents)} documenti totali...")
     index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
-    print(f"Indice creato con {len(documents)} documenti. Database salvato in {Path(output_dir) / 'chroma_db'}")
-    
-    
+    print("✅ Ingestion completata con successo.")
     return index
+
 
 if __name__ == "__main__":
     print("Inizio fase di ingestion dati...")
     ingest_data()
     print("Ingestion dati completata.")
-    print("\nRicorda di aver avviato Ollama e scaricato il modello 'llama3' ('ollama run llama3') prima di eseguire questo script.")
-    print("Ora puoi implementare la logica di querying o la chat Streamlit.")
+    print("\nRicorda di avere Ollama in esecuzione (nomic-embed-text) prima di eseguire questo script.")

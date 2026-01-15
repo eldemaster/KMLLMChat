@@ -1,0 +1,185 @@
+KMChat Metrics Run - 2026-01-14 23:09:12
+Model: kmchat-8b
+
+
+--- Repeat 1/1 ---
+
+==================== SCENARIO: KNOWLEDGE_RAG ====================
+
+👤 USER: Usa Mario Rossi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: FANS non consentiti per il paziente
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Ok
+🤖 BOT: Attività aggiunta con successo (Forzata).
+
+👤 USER: Debug RAG: non deve prendere FANS
+🤖 BOT: Il paziente "mario_rossi" non può utilizzare il dispositivo FANS a causa di una condizione medica specificata nel suo profilo.
+
+==================== SCENARIO: CAREGIVER_PREFS ====================
+
+👤 USER: Passa al caregiver Maria Rossi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Maria Rossi.
+
+👤 USER: Intendo sera alle 21:00
+🤖 BOT: Per favore, specifica il giorno della settimana per confermare l'orario.
+
+👤 USER: Sì
+🤖 BOT: Nessuna azione in sospeso.
+
+👤 USER: Debug RAG: sera e' 21:00
+🤖 BOT: Ho registrato questa informazione. La definizione di "sera" è stata confermata come le ore 21:00.
+
+==================== SCENARIO: CONFLICT_CHECK ====================
+
+👤 USER: Apri Paolo Verdi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Maria Rossi.
+
+👤 USER: Aggiungi Stretching leggero per lunedì alle 10:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Stretching leggero', 'description': 'Stretching leggero', 'days': ['Lunedì'], 'time': '10:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Mobilizzazione articolare' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: No grazie
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+==================== SCENARIO: SWITCH_AND_QUERY ====================
+
+👤 USER: Metti Paolo Verdi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Che attività ha il giovedì?
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Imposta Mario Rossi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Dimmi le attività di venerdì
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+==================== SCENARIO: PAOLO_TEMP ====================
+
+👤 USER: Imposta il paziente Paolo Verdi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Imposta il caregiver Maria Rossi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Inserisci attività Controllo fisioterapico mercoledì alle 11:00 per tre giorni
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Ok
+🤖 BOT: Attività aggiunta con successo (Forzata).
+
+👤 USER: Quali attività ci sono mercoledì?
+🤖 BOT: Nessuna attività per Mercoledð.
+
+==================== SCENARIO: MARIO_TEMPORARY ====================
+
+👤 USER: Imposta paziente Mario Rossi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Maria Rossi.
+
+👤 USER: Aggiungi Controllo pressione martedì ore 09:00 per 2 giorni
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Controllo pressione', 'description': 'Controllo pressione', 'days': ['Martedì'], 'time': '09:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': '2026-01-14', 'valid_until': '2026-01-16', 'duration_days': 2}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma pure
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Programma del martedì
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+==================== SCENARIO: MARIO_BASE ====================
+
+👤 USER: Usa paziente Mario Rossi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Scegli caregiver Andrea Bianchi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Attività previste per lunedì
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Metti 'Spuntino dolce' lunedì alle 08:00
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Annulla l'azione
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+==================== SCENARIO: MARIO_BASE ====================
+
+👤 USER: Seleziona il paziente Mario Rossi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Passa al caregiver Andrea Bianchi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Programma del lunedì
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Metti 'Spuntino dolce' lunedì alle 08:00
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Cancella
+🤖 BOT: Azione annullata.
+
+==================== SCENARIO: MARIO_TEMPORARY ====================
+
+👤 USER: Seleziona Mario Rossi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Maria Rossi.
+
+👤 USER: Aggiungi Controllo pressione martedì ore 09:00 per 2 giorni
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Controllo pressione', 'description': 'Controllo pressione', 'days': ['Martedì'], 'time': '09:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': '2026-01-14', 'valid_until': '2026-01-16', 'duration_days': 2}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Si
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Quali attività ci sono martedì?
+🤖 BOT: Nessuna attività per Martedò.
+
+==================== SCENARIO: CONFLICT_CHECK ====================
+
+👤 USER: Cambia paziente in Paolo Verdi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Maria Rossi.
+
+👤 USER: Aggiungi attività 'Stretching leggero' lunedì alle 10:00
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Stretching leggero', 'description': 'Stretching leggero', 'days': ['Lunedì'], 'time': '10:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': None, 'valid_until': None, 'duration_days': None}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Mobilizzazione articolare' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}; Conflitto temporale con 'Stretching leggero' (10:00) nei giorni {'Lunedì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: Annulla
+🤖 BOT: Azione annullata.
+
+==================== SCENARIO: PAOLO_TEMP ====================
+
+👤 USER: Apri profilo di Paolo Verdi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Maria Rossi.
+
+👤 USER: Attiva contesto caregiver Maria Rossi
+🤖 BOT: Contesto aggiornato: Paolo Verdi, Maria Rossi.
+
+👤 USER: Crea attività Controllo fisioterapico mercoledì alle 11:00 per 3 giorni
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Controllo fisioterapico', 'description': 'Controllo fisioterapico', 'days': ['Mercoledì'], 'time': '11:00', 'dependencies': [], 'force': True, 'confirm': True, 'valid_from': '2026-01-14', 'valid_until': '2026-01-17', 'duration_days': 3}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+⚠️ ATTENZIONE: Conflitto temporale con 'Controllo fisioterapico' (11:00) nei giorni {'Mercoledì'}; Conflitto temporale con 'Controllo fisioterapico' (11:00) nei giorni {'Mercoledì'}; Conflitto temporale con 'Controllo fisioterapico' (11:00) nei giorni {'Mercoledì'}; Conflitto temporale con 'Controllo fisioterapico' (11:00) nei giorni {'Mercoledì'}; Conflitto temporale con 'Controllo fisioterapico' (11:00) nei giorni {'Mercoledì'}.
+Per procedere comunque, conferma l'azione (verrà applicato force=True).
+
+👤 USER: Vai avanti
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Attività previste per mercoledì
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+==================== SCENARIO: KNOWLEDGE_RAG ====================
+
+👤 USER: Usa Mario Rossi
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Da oggi il paziente non deve assumere FANS
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Sì, salva
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.
+
+👤 USER: Debug RAG: FANS vietati
+🤖 BOT: Hai un'azione in sospeso: add_activity. Conferma o annulla per proseguire.

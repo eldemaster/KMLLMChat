@@ -1,0 +1,18 @@
+{
+    "patient_id": "TestAuto1",
+    "activities": [
+        {
+            "activity_id": "temp_1768466175",
+            "name": "Controllo pressione",
+            "description": "Controllo pressione",
+            "day_of_week": [
+                "Martedì",
+                "Mercoledì"
+            ],
+            "time": "09:00",
+            "dependencies": [],
+            "valid_from": "2026-01-15",
+            "valid_until": "2026-01-17"
+        }
+    ]
+}

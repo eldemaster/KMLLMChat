@@ -1,0 +1,25 @@
+{
+    "patient_id": "alessandro_01",
+    "name": "Alessandro",
+    "medical_conditions": [
+        "Ipertensione",
+        "Diabete tipo 2"
+    ],
+    "preferences": [
+        "Riposino alle 15:00",
+        "Evitare lattosio a colazione"
+    ],
+    "habits": [
+        "Cammina dopo pranzo"
+    ],
+    "notes": [
+        {
+            "content": "Evitare carboidrati semplici se non fa movimento",
+            "day": null
+        },
+        {
+            "content": "Controllo glicemia prima di colazione",
+            "day": "Lunedì"
+        }
+    ]
+}

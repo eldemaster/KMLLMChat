@@ -1,0 +1,17 @@
+KMChat LLM Focus Test - 2026-01-07T13:46:00.173337
+Model FAST: llama3.2:3b
+Model SMART: llama3.2:3b
+Total prompts: 7
+
+================================================================================
+PROMPT 1
+--------------------------------------------------------------------------------
+Cambia contesto su paziente demo_giuseppe e caregiver caregiver_01.
+
+================================================================================
+REPLY 1
+--------------------------------------------------------------------------------
+Certo! Il contesto è stato cambiato su paziente demo_giuseppe e caregiver caregiver_01.
+
+Giuseppe Rossi
+Maria Rossi

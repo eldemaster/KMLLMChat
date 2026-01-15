@@ -44,8 +44,22 @@ def test_add_missing_dependency(km_with_deps):
         day_of_week=["Lunedì"], time="13:00", dependencies=["Pranzo"]
     )
     
-    # Nota: check_temporal_conflict non controlla dipendenze. 
-    # Dovremo aggiungere un metodo check_dependency_completeness o integrarlo in add_activity
-    issues = km_with_deps.check_missing_dependencies(new_act)
+def test_dependency_sequence_error(km_with_deps):
+    # 'Colazione' è alle 08:00 (durata default 30m -> 08:30)
+    
+    # Caso 1: Attività PRIMA della dipendenza (07:00 < 08:00) -> Errore
+    too_early = Activity(
+        activity_id="4", name="Presto", description="...", 
+        day_of_week=["Lunedì"], time="07:00", dependencies=["Colazione"]
+    )
+    issues = km_with_deps.check_missing_dependencies(too_early)
     assert len(issues) > 0
-    assert "Pranzo" in issues[0]
+    assert "inizia prima della dipendenza" in issues[0]
+
+    # Caso 2: Attività DOPO la dipendenza (09:00 > 08:00) -> OK
+    ok_time = Activity(
+        activity_id="5", name="Dopo", description="...", 
+        day_of_week=["Lunedì"], time="09:00", dependencies=["Colazione"]
+    )
+    issues_ok = km_with_deps.check_missing_dependencies(ok_time)
+    assert len(issues_ok) == 0

@@ -1,0 +1,24 @@
+{
+    "patient_id": "mario_rossi",
+    "name": "Mario Rossi",
+    "medical_conditions": [
+        "Diabete di tipo 2",
+        "Ipertensione",
+        "FANS non consentiti per il paziente",
+        "Il paziente non deve assumere liquidi per 24 ore"
+    ],
+    "preferences": [
+        "Preferisce colazione leggera",
+        "Gradisce camminata al mattino"
+    ],
+    "habits": [
+        "Beve acqua spesso durante la giornata"
+    ],
+    "notes": [
+        {
+            "content": "Evitare zuccheri semplici",
+            "day": null,
+            "created_at": "2026-01-14T10:00:00"
+        }
+    ]
+}

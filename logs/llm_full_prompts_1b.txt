@@ -1,0 +1,22 @@
+Cambia contesto su paziente demo_giuseppe e caregiver caregiver_01.
+Mostrami le attività di Lunedì
+Consulta le linee guida della terapia del paziente
+Il paziente ha diabete
+conferma
+Il paziente preferisce fare il riposino alle 15
+conferma
+Quando dico Aulin intendo la forma granulare
+conferma
+Aggiungi attività Passeggiata lunedì alle 12:00 con force=True
+conferma
+Modifica l'attività Passeggiata di lunedì: spostala alle 13:00
+conferma
+Mostrami le attività di Lunedì
+Cambia contesto su paziente paziente_02 e caregiver caregiver_01.
+Mostrami le attività di Lunedì
+Aggiungi attività Riabilitazione lunedì alle 07:00 dipende da Chirurgia
+conferma
+Aggiungi attività Controllo pressione lunedì alle 09:00 per i prossimi 3 giorni
+conferma
+Mostrami le attività di Lunedì
+Mostrami le attività di oggi

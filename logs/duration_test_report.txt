@@ -1,0 +1,46 @@
+KMChat Duration Test - 2026-01-15 09:34:44
+Model: kmchat-14b
+
+
+👤 USER: Passa al paziente TestAuto1
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Passa al caregiver Andrea
+🤖 BOT: Contesto aggiornato: TestAuto1, Andrea.
+
+👤 USER: Aggiungi attività 'Controllo pressione' martedì alle 09:00 per i prossimi 2 giorni
+🤖 BOT: Azione in sospeso: add_activity con {'name': 'Controllo pressione', 'description': 'Controllo pressione', 'days': ['Martedì', 'Mercoledì'], 'time': '09:00', 'dependencies': [], 'force': False, 'confirm': True, 'valid_from': '2026-01-15', 'valid_until': '2026-01-17', 'duration_days': 2}. Scrivi 'conferma' per applicare o 'annulla' per annullare.
+
+👤 USER: Conferma
+🤖 BOT: Attività aggiunta con successo.
+
+👤 USER: Dimmi le attività di martedì
+🤖 BOT: Programma Martedì:
+- [09:00] Controllo pressione: Controllo pressione
+
+
+👤 USER: Dimmi le attività di mercoledì
+🤖 BOT: Programma Mercoledì:
+- [09:00] Controllo pressione: Controllo pressione
+
+
+👤 USER: Dimmi le attività di giovedì
+🤖 BOT: Nessuna attività per Giovedì.
+
+👤 USER: Dimmi le attività della settimana
+🤖 BOT: Programma settimanale:
+Lunedì:
+- (nessuna attività)
+Martedì:
+- [09:00] Controllo pressione: Controllo pressione
+Mercoledì:
+- [09:00] Controllo pressione: Controllo pressione
+Giovedì:
+- (nessuna attività)
+Venerdì:
+- (nessuna attività)
+Sabato:
+- (nessuna attività)
+Domenica:
+- (nessuna attività)
+
