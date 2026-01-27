@@ -72,3 +72,18 @@ def test_conflict_single_time_format(km_empty):
     
     conflicts = km_empty.check_temporal_conflict(new_act)
     assert len(conflicts) > 0, "Un'attività puntuale dentro un intervallo dovrebbe confliggere"
+
+def test_conflict_duration_minutes(km_empty):
+    existing = Activity(
+        activity_id="1", name="A", description="desc",
+        day_of_week=["Lunedì"], time="10:00", duration_minutes=60, dependencies=[]
+    )
+    km_empty.therapy.activities.append(existing)
+
+    new_act = Activity(
+        activity_id="2", name="B", description="desc",
+        day_of_week=["Lunedì"], time="10:30-11:00", dependencies=[]
+    )
+
+    conflicts = km_empty.check_temporal_conflict(new_act)
+    assert len(conflicts) > 0, "La durata deve estendere l'intervallo per rilevare sovrapposizioni"

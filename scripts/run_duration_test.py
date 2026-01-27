@@ -16,8 +16,7 @@ from src.ingest_data import ingest_data
 
 
 SCENARIO = [
-    "Passa al paziente TestAuto1",
-    "Passa al caregiver Andrea",
+    "Passa al paziente TestAuto1 e caregiver Andrea",
     "Aggiungi attività 'Controllo pressione' martedì alle 09:00 per i prossimi 2 giorni",
     "Conferma",
     "Dimmi le attività di martedì",

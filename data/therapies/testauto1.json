@@ -2,7 +2,87 @@
     "patient_id": "TestAuto1",
     "activities": [
         {
-            "activity_id": "temp_1768466175",
+            "activity_id": "temp_1769441112",
+            "name": "Lettura libro",
+            "description": "Lettura libro",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "16:00",
+            "duration_minutes": null,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769441182",
+            "name": "Fisioterapia",
+            "description": "Fisioterapia",
+            "day_of_week": [
+                "Martedì"
+            ],
+            "time": "10:00",
+            "duration_minutes": null,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769441410",
+            "name": "Camomilla",
+            "description": "Camomilla",
+            "day_of_week": [
+                "Mercoledì"
+            ],
+            "time": "21:00",
+            "duration_minutes": null,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769441590",
+            "name": "Pillola A",
+            "description": "Pillola A",
+            "day_of_week": [
+                "Venerdì"
+            ],
+            "time": "08:00",
+            "duration_minutes": null,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769441623",
+            "name": "Pillola B",
+            "description": "Pillola B",
+            "day_of_week": [
+                "Venerdì"
+            ],
+            "time": "08:30",
+            "duration_minutes": null,
+            "dependencies": [
+                "Pillola A"
+            ],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769441698",
+            "name": "Cyclette al chiuso",
+            "description": "Cyclette al chiuso",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "18:00",
+            "duration_minutes": null,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769442434",
             "name": "Controllo pressione",
             "description": "Controllo pressione",
             "day_of_week": [
@@ -10,9 +90,79 @@
                 "Mercoledì"
             ],
             "time": "09:00",
+            "duration_minutes": null,
             "dependencies": [],
-            "valid_from": "2026-01-15",
-            "valid_until": "2026-01-17"
+            "valid_from": "2026-01-26",
+            "valid_until": "2026-01-28"
+        },
+        {
+            "activity_id": "temp_1769442643",
+            "name": "Colazione",
+            "description": "Colazione",
+            "day_of_week": [
+                "Giovedì"
+            ],
+            "time": "08:00",
+            "duration_minutes": null,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769442679",
+            "name": "Farmaco X",
+            "description": "Farmaco X",
+            "day_of_week": [
+                "Giovedì"
+            ],
+            "time": "08:30",
+            "duration_minutes": null,
+            "dependencies": [
+                "Colazione"
+            ],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769443020",
+            "name": "Prendere pastiglia A",
+            "description": "Prendere pastiglia A",
+            "day_of_week": [
+                "Venerdì"
+            ],
+            "time": "08:00",
+            "duration_minutes": null,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769443056",
+            "name": "Prendere pastiglia B",
+            "description": "Prendere pastiglia B",
+            "day_of_week": [
+                "Venerdì"
+            ],
+            "time": "08:30",
+            "duration_minutes": null,
+            "dependencies": [
+                "Prendere pastiglia A"
+            ],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "temp_1769443136",
+            "name": "Fare cyclette al chiuso",
+            "description": "Fare cyclette al chiuso",
+            "day_of_week": [
+                "Lunedì"
+            ],
+            "time": "18:00",
+            "duration_minutes": null,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
         }
     ]
 }

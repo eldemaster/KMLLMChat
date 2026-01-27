@@ -59,8 +59,8 @@ TOOL_ARG_WHITELIST = {
     "get_schedule_week": set(),
     "get_patient_info": {"category"},
     "get_caregiver_info": {"category"},
-    "add_activity": {"name", "description", "days", "time", "dependencies", "force", "valid_from", "valid_until", "duration_days"},
-    "modify_activity": {"old_name", "day", "new_name", "new_description", "new_time", "force", "valid_from", "valid_until", "duration_days"},
+    "add_activity": {"name", "description", "days", "time", "duration_minutes", "dependencies", "force", "valid_from", "valid_until", "duration_days"},
+    "modify_activity": {"old_name", "day", "new_name", "new_description", "new_time", "new_days", "duration_minutes", "force", "valid_from", "valid_until", "duration_days"},
     "delete_activity": {"name", "day", "force"},
     "consult_guidelines": {"query"},
     "save_knowledge": {"category", "content", "day"},
@@ -81,6 +81,39 @@ def _normalize_duration_days(value) -> int | None:
     if isinstance(value, str) and value.strip().isdigit():
         return int(value.strip())
     return None
+
+def _normalize_duration_minutes(value) -> int | None:
+    if value is None:
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float):
+        return int(value)
+    if isinstance(value, str) and value.strip().isdigit():
+        return int(value.strip())
+    return None
+
+def _parse_time_to_minutes(value: str) -> int | None:
+    try:
+        hours, minutes = map(int, value.split(":"))
+        return hours * 60 + minutes
+    except Exception:
+        return None
+
+def _normalize_time_and_duration(time_str: str | None, duration_minutes: int | None) -> tuple[str | None, int | None]:
+    if not time_str:
+        return time_str, duration_minutes
+    cleaned = str(time_str).strip()
+    if "-" not in cleaned:
+        return cleaned, duration_minutes
+
+    start_str, end_str = [part.strip() for part in cleaned.split("-", 1)]
+    if duration_minutes is None:
+        start_min = _parse_time_to_minutes(start_str)
+        end_min = _parse_time_to_minutes(end_str)
+        if start_min is not None and end_min is not None and end_min > start_min:
+            duration_minutes = end_min - start_min
+    return start_str, duration_minutes
 
 def _expand_days_for_duration(days: List[str], duration_days: int | None) -> List[str]:
     if not duration_days or not days:
@@ -131,8 +164,13 @@ def _shorten_semantic_warning(text: str, max_len: int = 180) -> str:
         cleaned = cleaned[: max_len - 3].rstrip() + "..."
     return cleaned
 
+def _ensure_patient_context() -> str | None:
+    if not km.current_patient_id or not km.patient_profile:
+        return "Nessun paziente selezionato. Usa switch_context(patient_id, caregiver_id)."
+    return None
+
 # Inizializziamo il Knowledge Manager e Logger
-km = KnowledgeManager()
+km = KnowledgeManager(auto_discover=False)
 logger = setup_logger("cli", "cli")
 PENDING_ACTION: Dict[str, Any] | None = None
 
@@ -238,6 +276,7 @@ def _index_activity_in_rag(activity: Activity, source: str) -> None:
             f"Descrizione: {activity.description}\n"
             f"Giorni: {', '.join(activity.day_of_week)}\n"
             f"Orario: {activity.time}\n"
+            f"Durata (minuti): {activity.duration_minutes if activity.duration_minutes is not None else 'Non specificata'}\n"
             f"Dipendenze: {', '.join(activity.dependencies) if activity.dependencies else 'Nessuna'}"
         )
         meta = {
@@ -406,8 +445,14 @@ def _sanitize_tool_args(tool_name: str, args: Dict[str, Any], user_input: str | 
             filtered["dependencies"] = []
         if isinstance(filtered.get("time"), str):
             filtered["time"] = filtered["time"].strip()
+        filtered["time"], filtered["duration_minutes"] = _normalize_time_and_duration(
+            filtered.get("time"),
+            filtered.get("duration_minutes"),
+        )
         if not filtered.get("description"):
             filtered["description"] = filtered.get("name", "")
+        if "duration_minutes" in filtered:
+            filtered["duration_minutes"] = _normalize_duration_minutes(filtered.get("duration_minutes"))
         if "duration_days" in filtered:
             filtered["duration_days"] = _normalize_duration_days(filtered.get("duration_days"))
     elif tool_name == "modify_activity":
@@ -416,9 +461,21 @@ def _sanitize_tool_args(tool_name: str, args: Dict[str, Any], user_input: str | 
             filtered["day"] = day[0] if day else None
         if isinstance(filtered.get("day"), str):
             filtered["day"] = filtered["day"].strip()
+        new_days = filtered.get("new_days")
+        if isinstance(new_days, str):
+            filtered["new_days"] = [new_days]
+        elif new_days is None:
+            filtered["new_days"] = []
+        filtered["new_days"] = [d.strip() for d in filtered.get("new_days", []) if isinstance(d, str) and d.strip()]
         if "new_time" in filtered:
             if isinstance(filtered.get("new_time"), str):
                 filtered["new_time"] = filtered["new_time"].strip()
+            filtered["new_time"], filtered["duration_minutes"] = _normalize_time_and_duration(
+                filtered.get("new_time"),
+                filtered.get("duration_minutes"),
+            )
+        if "duration_minutes" in filtered:
+            filtered["duration_minutes"] = _normalize_duration_minutes(filtered.get("duration_minutes"))
         if "duration_days" in filtered:
             filtered["duration_days"] = _normalize_duration_days(filtered.get("duration_days"))
     elif tool_name == "delete_activity":
@@ -439,8 +496,8 @@ def _coerce_tool_call(llm_fast, user_input: str) -> Dict[str, Any] | None:
         "Sei un router di tool molto rigido. Restituisci SOLO un JSON valido.\n"
         "Strumenti disponibili:\n"
         "- get_schedule(day)\n"
-        "- add_activity(name, description, days, time, dependencies=[], force=False)\n"
-        "- modify_activity(old_name, day, new_name, new_description, new_time, force=False)\n"
+        "- add_activity(name, description, days, time, duration_minutes=None, dependencies=[], force=False)\n"
+        "- modify_activity(old_name, day, new_name, new_description, new_time, new_days, duration_minutes=None, force=False)\n"
         "- delete_activity(name, day, force=False)\n"
         "- consult_guidelines(query)\n"
         "- save_knowledge(category, content, day=None)\n"
@@ -630,6 +687,8 @@ def save_knowledge_tool(category: str, content: str | dict | None = None, day: s
 def switch_context_tool(patient_id: str = None, caregiver_id: str = None) -> str:
     pid = patient_id or km.current_patient_id
     cid = caregiver_id or km.current_caregiver_id
+    if not pid and not cid:
+        return "Errore: specifica patient_id e caregiver_id."
     if isinstance(pid, dict): pid = pid.get("value", pid.get("id", str(pid)))
     if isinstance(cid, dict): cid = cid.get("value", cid.get("id", str(cid)))
     pid = str(pid).strip() if pid is not None else pid
@@ -653,6 +712,9 @@ def switch_context_tool(patient_id: str = None, caregiver_id: str = None) -> str
     return f"Contesto aggiornato: {km.patient_profile.name}, {km.caregiver_profile.name}."
 
 def delete_activity_tool(name: str, day: str, force: bool = False, confirm: bool = False) -> str:
+    context_error = _ensure_patient_context()
+    if context_error:
+        return context_error
     if not confirm:
         return _stage_action("delete_activity", {"name": name, "day": day, "force": force, "confirm": True})
     return km.remove_activity(name, day, force=force)
@@ -663,12 +725,17 @@ def modify_activity_tool(
     new_name: str = None,
     new_description: str = None,
     new_time: str = None,
+    new_days: List[str] = None,
+    duration_minutes: int | None = None,
     force: bool = False,
     confirm: bool = False,
     valid_from: str | None = None,
     valid_until: str | None = None,
     duration_days: int | None = None,
 ) -> str:
+    context_error = _ensure_patient_context()
+    if context_error:
+        return context_error
     # 1. Validazione
     if not old_name or not day:
         return "Errore: Devi specificare il nome dell'attività da modificare e il giorno."
@@ -682,7 +749,13 @@ def modify_activity_tool(
     updates = {}
     if new_name: updates["name"] = new_name
     if new_description: updates["description"] = new_description
-    if new_time: updates["time"] = new_time
+    if new_time:
+        new_time, duration_minutes = _normalize_time_and_duration(new_time, duration_minutes)
+        updates["time"] = new_time
+    if new_days:
+        updates["day_of_week"] = new_days
+    if duration_minutes is not None:
+        updates["duration_minutes"] = duration_minutes
     valid_from, valid_until = _apply_duration(valid_from, valid_until, duration_days)
     if valid_from: updates["valid_from"] = valid_from
     if valid_until: updates["valid_until"] = valid_until
@@ -725,6 +798,8 @@ def modify_activity_tool(
                 "new_name": new_name,
                 "new_description": new_description,
                 "new_time": new_time,
+                "new_days": new_days,
+                "duration_minutes": duration_minutes,
                 "force": force,
                 "confirm": True,
                 "valid_from": valid_from,
@@ -746,6 +821,7 @@ def add_activity_tool(
     description: str = "",
     days: List[str] = [],
     time: str = None,
+    duration_minutes: int | None = None,
     dependencies: List[str] = [],
     force: bool = False,
     confirm: bool = False,
@@ -753,6 +829,9 @@ def add_activity_tool(
     valid_until: str | None = None,
     duration_days: int | None = None,
 ) -> str:
+    context_error = _ensure_patient_context()
+    if context_error:
+        return context_error
     # 1. Validazione Parametri Base
     if not name:
         return "Errore: Devi specificare il NOME dell'attività."
@@ -766,6 +845,7 @@ def add_activity_tool(
         import time as t
         temp_id = f"temp_{int(t.time())}"
         valid_from, valid_until = _apply_duration(valid_from, valid_until, duration_days)
+        time, duration_minutes = _normalize_time_and_duration(time, duration_minutes)
         
         # Pulizia giorni
         clean_days = [d.strip() for d in days if isinstance(d, str) and d.strip()]
@@ -777,6 +857,7 @@ def add_activity_tool(
             description=description or name,
             day_of_week=clean_days,
             time=time,
+            duration_minutes=duration_minutes,
             dependencies=dependencies,
             valid_from=valid_from,
             valid_until=valid_until,
@@ -817,6 +898,7 @@ def add_activity_tool(
                     "description": description,
                     "days": days,
                     "time": time,
+                    "duration_minutes": duration_minutes,
                     "dependencies": dependencies,
                     "force": force,
                     "confirm": True,
@@ -841,15 +923,25 @@ def add_activity_tool(
         return f"Errore interno: {str(e)}"
 
 def get_schedule_tool(day: str = None, date: str = None) -> str:
+    context_error = _ensure_patient_context()
+    if context_error:
+        return context_error
     if not day:
         return "Errore: specifica un giorno per il programma."
     activities = km.get_activities_by_day(day, date_str=date)
     if not activities: return f"Nessuna attività per {day}."
     output = f"Programma {day}:\n"
-    for act in activities: output += f"- [{act.time}] {act.name}: {act.description}\n"
+    for act in activities:
+        time_label = act.time
+        if act.duration_minutes and "-" not in act.time:
+            time_label = f"{act.time} ({act.duration_minutes}m)"
+        output += f"- [{time_label}] {act.name}: {act.description}\n"
     return output
 
 def get_schedule_week_tool() -> str:
+    context_error = _ensure_patient_context()
+    if context_error:
+        return context_error
     week = km.get_week_schedule()
     output = "Programma settimanale:\n"
     for day, activities in week.items():
@@ -858,7 +950,10 @@ def get_schedule_week_tool() -> str:
             output += "- (nessuna attività)\n"
             continue
         for act in activities:
-            output += f"- [{act.time}] {act.name}: {act.description}\n"
+            time_label = act.time
+            if act.duration_minutes and "-" not in act.time:
+                time_label = f"{act.time} ({act.duration_minutes}m)"
+            output += f"- [{time_label}] {act.name}: {act.description}\n"
     return output
 
 def get_patient_info_tool(category: str = "conditions") -> str:
@@ -1016,10 +1111,13 @@ Caregivers: {available.get("caregivers")}
 3. NO ALLUCINAZIONI: Se mancano dati (ora/giorno), usa `reply` per chiederli.
 4. CONFERME: Se un'azione è in sospeso e l'utente dice "sì", "ok", "conferma" o "salva", usa `confirm_action()`.
 5. PROGRAMMA: Usa `get_schedule_week()` SOLO se l'utente chiede la settimana intera.
-6. MODIFY: `modify_activity` richiede SEMPRE il giorno (`day`).
-7. DURATA TEMPORANEA: se l'utente dice "per i prossimi N giorni", usa `duration_days: N` (non inventare date).
+6. CONTESTO: Se non è selezionato un paziente, chiedi di usare `switch_context` con un ID dalla lista.
+7. MODIFY: `modify_activity` richiede SEMPRE il giorno (`day`).
+   - Se l'utente vuole aggiungere un giorno alla stessa attività, usa `new_days` con la lista aggiornata.
+8. DURATA TEMPORANEA: se l'utente dice "per i prossimi N giorni", usa `duration_days: N` (non inventare date).
    - Se è indicato UN solo giorno, estendi automaticamente i giorni consecutivi (giorno iniziale + N giorni).
-8. CATEGORIE KNOWLEDGE:
+   - Se l'utente specifica la durata dell'attività in minuti, usa `duration_minutes`.
+9. CATEGORIE KNOWLEDGE:
    - Paziente: salute, condizioni, abitudini, preferenze del paziente.
    - Caregiver: preferenze linguistiche/semantiche, routine, frasi in prima persona ("io", "per me", "quando dico").
    - Vincoli/Divieti ("non deve", "vietato", "non assumere") sono condizioni del paziente, NON abitudini.
@@ -1027,17 +1125,17 @@ Caregivers: {available.get("caregivers")}
    - Se l'utente dice "salva questa informazione" senza una pending action, chiedi quale informazione salvare.
    - Se l'utente chiede "note del paziente", usa `get_patient_info(category="notes")`.
    - Se l'utente chiede "note del caregiver", usa `get_caregiver_info(category="notes")`.
-9. FORMATI: Usa SOLO questi giorni: Lunedì, Martedì, Mercoledì, Giovedì, Venerdì, Sabato, Domenica. Accento grave su ì/è (non í/é).
-10. FORMATI ORA: Usa "HH:MM" oppure intervallo "HH:MM-HH:MM". Non usare parole come "sera".
-11. MULTI-AZIONE: Se l'utente chiede più azioni nello stesso messaggio, usa `reply` per chiedere di separarle.
-12. STILE: Risposte concise, senza saluti o firme.
+10. FORMATI: Usa SOLO questi giorni: Lunedì, Martedì, Mercoledì, Giovedì, Venerdì, Sabato, Domenica. Accento grave su ì/è (non í/é).
+11. FORMATI ORA: Se l'utente fornisce un intervallo "HH:MM-HH:MM", converti in orario iniziale + `duration_minutes`. Non usare parole come "sera".
+12. MULTI-AZIONE: Se l'utente chiede più azioni nello stesso messaggio, usa `reply` per chiedere di separarle.
+13. STILE: Risposte concise, senza saluti o firme.
 
 STRUMENTI:
 - `get_schedule(day)`
 - `get_schedule_week()`
 - `get_patient_info(category)`
 - `get_caregiver_info(category)`
-- `add_activity(name, days, time, dependencies=[], force=False)`
+- `add_activity(name, days, time, duration_minutes=None, dependencies=[], force=False)`
 - `modify_activity(...)`
 - `delete_activity(name, day)`
 - `save_knowledge(category, content)`: Categorie: 'conditions', 'preferences', 'habits', 'caregiver'.

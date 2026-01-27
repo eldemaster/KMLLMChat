@@ -35,7 +35,7 @@ DB_DIR = "data"
 logger = setup_logger("app", "app")
 
 if "km" not in st.session_state:
-    st.session_state.km = KnowledgeManager()
+    st.session_state.km = KnowledgeManager(auto_discover=False)
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
@@ -47,20 +47,49 @@ if "pending_action" not in st.session_state:
 # --- DEFINIZIONE TOOLS (Adattati per Streamlit) ---
 # Nota: Li ridefiniamo qui per garantire accesso allo stato della sessione se necessario
 
-def add_activity_tool(name: str, description: str, days: list, time: str, confirm: bool = False) -> str:
+def add_activity_tool(
+    name: str,
+    description: str,
+    days: list,
+    time: str,
+    duration_minutes: int | None = None,
+    confirm: bool = False,
+) -> str:
     """Aggiunge una nuova attività alla terapia."""
     try:
+        if not st.session_state.km.current_patient_id:
+            return "Nessun paziente selezionato. Imposta il contesto prima di aggiungere attività."
         if not confirm:
             st.session_state.pending_action = {
                 "tool": "add_activity",
-                "args": {"name": name, "description": description, "days": days, "time": time, "confirm": True},
+                "args": {
+                    "name": name,
+                    "description": description,
+                    "days": days,
+                    "time": time,
+                    "duration_minutes": duration_minutes,
+                    "confirm": True,
+                },
             }
             return "Azione in sospeso. Scrivi 'conferma' per applicare o 'annulla' per annullare."
         import time as t_lib
         act_id = f"act_{int(t_lib.time())}"
+        if isinstance(time, str) and "-" in time:
+            parts = [p.strip() for p in time.split("-", 1)]
+            if len(parts) == 2:
+                try:
+                    start_h, start_m = map(int, parts[0].split(":"))
+                    end_h, end_m = map(int, parts[1].split(":"))
+                    start_min = start_h * 60 + start_m
+                    end_min = end_h * 60 + end_m
+                    if end_min > start_min and duration_minutes is None:
+                        duration_minutes = end_min - start_min
+                    time = parts[0]
+                except Exception:
+                    pass
         new_activity = Activity(
             activity_id=act_id, name=name, description=description,
-            day_of_week=days, time=time, dependencies=[]
+            day_of_week=days, time=time, duration_minutes=duration_minutes, dependencies=[]
         )
         result = st.session_state.km.add_activity(new_activity)
         return result
@@ -69,12 +98,17 @@ def add_activity_tool(name: str, description: str, days: list, time: str, confir
 
 def get_schedule_tool(day: str) -> str:
     """Restituisce le attività per un giorno specifico."""
+    if not st.session_state.km.current_patient_id:
+        return "Nessun paziente selezionato. Imposta il contesto prima di richiedere il programma."
     activities = st.session_state.km.get_activities_by_day(day)
     if not activities:
         return f"Nessuna attività prevista per {day}."
     output = f"Programma per {day}:\n"
     for act in activities:
-        output += f"- [{act.time}] {act.name}\n"
+        time_label = act.time
+        if act.duration_minutes and "-" not in act.time:
+            time_label = f"{act.time} ({act.duration_minutes}m)"
+        output += f"- [{time_label}] {act.name}\n"
     return output
 
 def confirm_action_tool() -> str:
@@ -158,9 +192,54 @@ agent = get_agent()
 with st.sidebar:
     st.title("📅 Terapia Attuale")
     st.markdown("---")
+
+    available = st.session_state.km.get_available_users()
+    patients = available.get("patients") or []
+    caregivers = available.get("caregivers") or []
+    patient_map = {p.get("id"): p for p in patients if p.get("id")}
+    caregiver_map = {c.get("id"): c for c in caregivers if c.get("id")}
+
+    if not patient_map:
+        st.warning("Nessun paziente disponibile.")
+    if not caregiver_map:
+        st.warning("Nessun caregiver disponibile.")
+
+    if patient_map:
+        patient_ids = list(patient_map.keys())
+        current_pid = st.session_state.km.current_patient_id
+        patient_index = patient_ids.index(current_pid) if current_pid in patient_ids else 0
+        selected_patient = st.selectbox(
+            "Paziente",
+            options=patient_ids,
+            index=patient_index,
+            format_func=lambda pid: f"{patient_map[pid].get('name', 'Sconosciuto')} ({pid})",
+        )
+    else:
+        selected_patient = None
+
+    if caregiver_map:
+        caregiver_ids = list(caregiver_map.keys())
+        current_cid = st.session_state.km.current_caregiver_id
+        caregiver_index = caregiver_ids.index(current_cid) if current_cid in caregiver_ids else 0
+        selected_caregiver = st.selectbox(
+            "Caregiver",
+            options=caregiver_ids,
+            index=caregiver_index,
+            format_func=lambda cid: f"{caregiver_map[cid].get('name', 'Sconosciuto')} ({cid})",
+        )
+    else:
+        selected_caregiver = None
+
+    if st.button("✅ Imposta contesto"):
+        if not selected_patient or not selected_caregiver:
+            st.warning("Seleziona paziente e caregiver prima di continuare.")
+        else:
+            st.session_state.km.set_context(selected_patient, selected_caregiver)
+            st.rerun()
     
     # Ricarica dati aggiornati
-    st.session_state.km.load_data()
+    if st.session_state.km.current_patient_id:
+        st.session_state.km.load_data()
     therapy = st.session_state.km.therapy
     
     if therapy and therapy.activities:
@@ -186,8 +265,11 @@ with st.sidebar:
         
     st.markdown("---")
     if st.button("🔄 Ricarica Dati"):
-        st.session_state.km.load_data()
-        st.rerun()
+        if st.session_state.km.current_patient_id:
+            st.session_state.km.load_data()
+            st.rerun()
+        else:
+            st.warning("Seleziona un paziente prima di ricaricare.")
 
 # MAIN: Chat Interface
 st.header("💬 KMChat Assistant")

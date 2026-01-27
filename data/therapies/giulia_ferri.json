@@ -1,0 +1,60 @@
+{
+    "patient_id": "giulia_ferri",
+    "activities": [
+        {
+            "activity_id": "gf_001",
+            "name": "Fisioterapia",
+            "description": "Esercizi di mobilita articolare",
+            "day_of_week": [
+                "Martedì",
+                "Giovedì"
+            ],
+            "time": "10:00",
+            "duration_minutes": 30,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "gf_002",
+            "name": "Calcio supplemento",
+            "description": "Assunzione supplemento di calcio",
+            "day_of_week": [
+                "Lunedì",
+                "Mercoledì",
+                "Venerdì"
+            ],
+            "time": "08:30",
+            "duration_minutes": 5,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "gf_003",
+            "name": "Esercizi respiratori",
+            "description": "Esercizi leggeri di respirazione",
+            "day_of_week": [
+                "Sabato"
+            ],
+            "time": "09:30",
+            "duration_minutes": 15,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "gf_004",
+            "name": "Tisana serale",
+            "description": "Tisana rilassante prima di dormire",
+            "day_of_week": [
+                "Domenica"
+            ],
+            "time": "20:30",
+            "duration_minutes": 10,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        }
+    ]
+}

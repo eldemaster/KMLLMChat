@@ -9,18 +9,27 @@ from src.models import Therapy, Activity, PatientProfile, CaregiverProfile, Note
 DATA_DIR = Path("data")
 logger = logging.getLogger("kmchat.km")
 class KnowledgeManager:
-    def __init__(self, patient_id: str = None, caregiver_id: str = None):
+    def __init__(
+        self,
+        patient_id: str = None,
+        caregiver_id: str = None,
+        auto_discover: bool = False,
+    ):
         self.therapy: Optional[Therapy] = None
         self.patient_profile: Optional[PatientProfile] = None
         self.caregiver_profile: Optional[CaregiverProfile] = None
         
-        # Discovery automatico se non specificati
-        self.current_patient_id = patient_id or self._discover_first_id("patients")
-        self.current_caregiver_id = caregiver_id or self._discover_first_id("caregivers")
+        # Discovery automatico solo se richiesto
+        if auto_discover:
+            self.current_patient_id = patient_id or self._discover_first_id("patients")
+            self.current_caregiver_id = caregiver_id or self._discover_first_id("caregivers")
+        else:
+            self.current_patient_id = patient_id
+            self.current_caregiver_id = caregiver_id
         
         if self.current_patient_id and self.current_caregiver_id:
             self.load_data()
-        else:
+        elif auto_discover or patient_id or caregiver_id:
             logger.warning("Nessun contesto iniziale completo trovato. Usare set_context().")
 
     def _discover_first_id(self, folder_name: str) -> Optional[str]:
@@ -52,13 +61,13 @@ class KnowledgeManager:
             for f in (DATA_DIR / "patients").glob("*.json"):
                 try:
                     data = json.loads(f.read_text())
-                    patients.append({"id": data.get("patient_id"), "name": data.get("name")})
+                    patients.append({"id": data.get("patient_id") or f.stem, "name": data.get("name")})
                 except: pass
         if (DATA_DIR / "caregivers").exists():
             for f in (DATA_DIR / "caregivers").glob("*.json"):
                 try:
                     data = json.loads(f.read_text())
-                    caregivers.append({"id": data.get("caregiver_id"), "name": data.get("name")})
+                    caregivers.append({"id": data.get("caregiver_id") or f.stem, "name": data.get("name")})
                 except: pass
         return {"patients": patients, "caregivers": caregivers}
 
@@ -92,7 +101,6 @@ class KnowledgeManager:
 
     def load_data(self):
         if not self.current_patient_id:
-            logger.error("Tentativo di caricare dati senza Patient ID.")
             return
 
         p_file = self._get_patient_file(self.current_patient_id)
@@ -189,15 +197,16 @@ class KnowledgeManager:
             return h * 60 + m
         except ValueError: return -1
 
-    def _get_time_interval(self, time_str: str) -> tuple[int, int]:
+    def _get_time_interval(self, time_str: str, duration_minutes: int | None = None) -> tuple[int, int]:
         if '-' in time_str:
             parts = time_str.split('-')
             start = self._parse_time_to_minutes(parts[0].strip())
             end = self._parse_time_to_minutes(parts[1].strip())
             return start, end
-        else:
-            start = self._parse_time_to_minutes(time_str.strip())
-            return start, start + 30
+        start = self._parse_time_to_minutes(time_str.strip())
+        if duration_minutes is not None and duration_minutes > 0:
+            return start, start + duration_minutes
+        return start, start + 30
 
     def _parse_date(self, date_str: str) -> Optional[date]:
         if not date_str:
@@ -265,14 +274,20 @@ class KnowledgeManager:
     def check_temporal_conflict(self, new_activity: Activity) -> List[str]:
         conflicts = []
         try:
-            new_start, new_end = self._get_time_interval(new_activity.time)
+            new_start, new_end = self._get_time_interval(
+                new_activity.time,
+                new_activity.duration_minutes,
+            )
         except: return ["Formato orario non valido"]
 
         for existing in self.therapy.activities:
             common_days = set(new_activity.day_of_week) & set(existing.day_of_week)
             if common_days:
                 try:
-                    ex_start, ex_end = self._get_time_interval(existing.time)
+                    ex_start, ex_end = self._get_time_interval(
+                        existing.time,
+                        existing.duration_minutes,
+                    )
                     if new_start < ex_end and new_end > ex_start:
                          conflicts.append(f"Conflitto temporale con '{existing.name}' ({existing.time}) nei giorni {common_days}")
                 except: continue

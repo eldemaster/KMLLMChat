@@ -1,0 +1,64 @@
+{
+    "patient_id": "luca_bianchi",
+    "activities": [
+        {
+            "activity_id": "lb_001",
+            "name": "Misurazione glicemia",
+            "description": "Controllo glicemia a digiuno",
+            "day_of_week": [
+                "Lunedì",
+                "Mercoledì",
+                "Venerdì"
+            ],
+            "time": "07:30",
+            "duration_minutes": 10,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "lb_002",
+            "name": "Colazione",
+            "description": "Colazione salata con proteine",
+            "day_of_week": [
+                "Lunedì",
+                "Mercoledì",
+                "Venerdì"
+            ],
+            "time": "08:00",
+            "duration_minutes": 20,
+            "dependencies": [
+                "Misurazione glicemia"
+            ],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "lb_003",
+            "name": "Passeggiata post pranzo",
+            "description": "Camminata leggera di 20 minuti",
+            "day_of_week": [
+                "Martedì",
+                "Giovedì"
+            ],
+            "time": "14:30",
+            "duration_minutes": 20,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        },
+        {
+            "activity_id": "lb_004",
+            "name": "Controllo pressione",
+            "description": "Misurazione pressione arteriosa",
+            "day_of_week": [
+                "Sabato"
+            ],
+            "time": "09:00",
+            "duration_minutes": 15,
+            "dependencies": [],
+            "valid_from": null,
+            "valid_until": null
+        }
+    ]
+}

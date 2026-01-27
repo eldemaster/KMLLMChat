@@ -8687,3 +8687,487 @@ TypeError: modify_activity_tool() missing 1 required positional argument: 'old_n
 2026-01-15 09:47:52 [INFO] kmchat.cli - Tool: add_activity Args: {'name': "Spremuta d'arancia", 'days': ['Martedì'], 'time': '18:00', 'dependencies': [], 'description': "Spremuta d'arancia"}
 2026-01-15 09:48:53 [INFO] kmchat.cli - Routing: 'Annulla' -> SMART Model
 2026-01-15 09:49:05 [INFO] kmchat.cli - Routing: 'ciao' -> SMART Model
+2026-01-15 10:01:53 [INFO] kmchat.cli - Routing: 'ciao' -> SMART Model
+2026-01-15 10:05:11 [INFO] kmchat.cli - Routing: 'Passa al paziente Mario Rossi' -> SMART Model
+2026-01-15 10:05:51 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'mario_rossi', 'caregiver_id': 'andrea_01'}
+2026-01-15 10:07:05 [INFO] kmchat.cli - Routing: 'Dimmi le attività della settimana' -> SMART Model
+2026-01-15 10:07:39 [INFO] kmchat.cli - Tool: get_schedule_week Args: {}
+2026-01-15 10:08:32 [INFO] kmchat.cli - Routing: 'Aggiungi attività "Fisioterapia" giovedì alle 11' -> SMART Model
+2026-01-15 10:09:06 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Fisioterapia', 'days': ['Giovedì'], 'time': '11:00', 'dependencies': [], 'description': 'Fisioterapia'}
+2026-01-15 10:12:34 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-15 10:14:16 [INFO] kmchat.cli - Routing: 'Aggiungi attività "Pisolino" alle 7:30 di lunedì' -> SMART Model
+2026-01-15 10:15:07 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Pisolino', 'days': ['Lunedì'], 'time': '07:30', 'dependencies': [], 'description': 'Pisolino'}
+2026-01-15 10:20:44 [INFO] kmchat.cli - Routing: 'conferma' -> SMART Model
+2026-01-15 10:25:37 [INFO] kmchat.cli - Routing: 'aggiungi "Caramelle" alle 18 di venerdì' -> SMART Model
+2026-01-15 10:26:24 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Caramelle', 'days': ['Venerdì'], 'time': '18:00', 'dependencies': [], 'force': False, 'description': 'Caramelle'}
+2026-01-23 17:11:25 [INFO] kmchat.cli - Routing: 'ciao' -> SMART Model
+2026-01-23 17:12:30 [INFO] kmchat.cli - Routing: 'quanto fa 2+2?' -> SMART Model
+2026-01-23 17:13:23 [INFO] kmchat.cli - Routing: 'ok, dimmi chi sono il paziente e il caregiver selezionati ora' -> SMART Model
+2026-01-23 17:14:00 [INFO] kmchat.cli - Tool: switch_context Args: {}
+2026-01-23 17:14:29 [INFO] kmchat.cli - Routing: 'dimmi l'elenco di pazienti e caregiver disponibili' -> SMART Model
+2026-01-23 17:16:09 [INFO] kmchat.cli - Routing: 'ok, seleziona caregiver Andrea Bianchi' -> SMART Model
+2026-01-23 17:16:39 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': None, 'caregiver_id': 'andrea_bianchi'}
+2026-01-23 17:16:58 [INFO] kmchat.cli - Routing: 'seleziona paziente Mario Rossi' -> SMART Model
+2026-01-23 17:17:26 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'mario_rossi', 'caregiver_id': 'andrea_bianchi'}
+2026-01-23 17:17:55 [INFO] kmchat.cli - Routing: 'perfetto, ora dimmi le attività della settimana per il paziente' -> SMART Model
+2026-01-23 17:18:23 [INFO] kmchat.cli - Tool: get_schedule_week Args: {}
+2026-01-23 17:18:52 [INFO] kmchat.cli - Routing: 'rimuovi tutte le attività con nome: Controllo pressione' -> SMART Model
+2026-01-23 17:19:20 [INFO] kmchat.cli - Tool: delete_activity Args: {'name': 'Controllo pressione', 'day': 'Tutti'}
+2026-01-23 17:19:31 [INFO] kmchat.cli - Routing: 'conferma' -> SMART Model
+2026-01-23 17:20:11 [INFO] kmchat.cli - Routing: 'intendevo, cancella attività Controllo pressione per Martedì alle  9:00' -> SMART Model
+2026-01-23 17:20:40 [INFO] kmchat.cli - Tool: delete_activity Args: {'name': 'Controllo pressione', 'day': 'Martedì'}
+2026-01-23 17:20:56 [INFO] kmchat.cli - Routing: 'conferma' -> SMART Model
+2026-01-23 17:21:11 [INFO] kmchat.cli - Routing: 'dimmi le attività della settimana per il paziente' -> SMART Model
+2026-01-23 17:21:39 [INFO] kmchat.cli - Tool: get_schedule_week Args: {}
+2026-01-24 02:25:07 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:25:40 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:25:41 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-24 02:26:01 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-24 02:26:01 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Lettura libro' lunedì alle 16:00' -> SMART Model
+2026-01-24 02:26:22 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Lettura libro', 'days': ['Lunedì'], 'time': '16:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Lettura libro'}
+2026-01-24 02:26:23 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:26:24 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-24 02:26:43 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-24 02:26:44 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:27:02 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:27:03 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Fisioterapia' martedì alle 10:00' -> SMART Model
+2026-01-24 02:27:24 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Fisioterapia', 'days': ['Martedì'], 'time': '10:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Fisioterapia'}
+2026-01-24 02:27:24 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:27:25 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Visita Infermieristica' martedì alle 10:15' -> SMART Model
+2026-01-24 02:27:47 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Visita Infermieristica', 'days': ['Martedì'], 'time': '10:15', 'dependencies': [], 'duration_minutes': None, 'description': 'Visita Infermieristica'}
+2026-01-24 02:27:47 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-24 02:27:48 [INFO] kmchat.cli - Routing: 'Dimmi le attività di martedì' -> SMART Model
+2026-01-24 02:28:10 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Martedì'}
+2026-01-24 02:28:10 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:28:29 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:28:29 [INFO] kmchat.cli - Routing: 'Il paziente non può bere latte a colazione' -> SMART Model
+2026-01-24 02:28:49 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'conditions', 'content': 'Il paziente non può bere latte a colazione'}
+2026-01-24 02:28:49 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:28:50 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 02:29:18 [INFO] kmchat.cli - Routing: 'Quali sono le condizioni del paziente?' -> SMART Model
+2026-01-24 02:29:38 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'conditions'}
+2026-01-24 02:29:39 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:29:57 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:29:58 [INFO] kmchat.cli - Routing: 'Quando dico 'sera' intendo le ore 21:00' -> SMART Model
+2026-01-24 02:30:19 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': "Quando dico 'sera' intendo le ore 21:00"}
+2026-01-24 02:30:19 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:30:20 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Camomilla' mercoledì di sera' -> SMART Model
+2026-01-24 02:30:42 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Camomilla', 'days': ['Mercoledì'], 'time': '21:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Camomilla'}
+2026-01-24 02:30:45 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:30:47 [INFO] kmchat.cli - Routing: 'Dimmi le attività di mercoledì' -> SMART Model
+2026-01-24 02:31:09 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Mercoledì'}
+2026-01-24 02:31:09 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:31:28 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:31:29 [INFO] kmchat.cli - Routing: 'Il paziente ha il diabete di tipo 1' -> SMART Model
+2026-01-24 02:31:49 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'conditions', 'content': 'Il paziente ha il diabete di tipo 1'}
+2026-01-24 02:31:49 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:31:50 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Merenda con Torta' giovedì alle 16:00' -> SMART Model
+2026-01-24 02:32:12 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Merenda con Torta', 'days': ['Giovedì'], 'time': '16:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Merenda con Torta'}
+2026-01-24 02:32:15 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-24 02:32:16 [INFO] kmchat.cli - Routing: 'Dimmi le attività di giovedì' -> SMART Model
+2026-01-24 02:32:38 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Giovedì'}
+2026-01-24 02:32:39 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:32:58 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:32:58 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Pillola A' venerdì alle 08:00' -> SMART Model
+2026-01-24 02:33:18 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Pillola A', 'days': ['Venerdì'], 'time': '08:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Pillola A'}
+2026-01-24 02:33:22 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:33:23 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Pillola B' venerdì alle 08:30 con dipendenza Pillola A' -> SMART Model
+2026-01-24 02:33:46 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Pillola B', 'days': ['Venerdì'], 'time': '08:30', 'dependencies': ['Pillola A'], 'duration_minutes': None, 'description': 'Pillola B'}
+2026-01-24 02:33:49 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:33:51 [INFO] kmchat.cli - Routing: 'Rimuovi attività 'Pillola A' di venerdì' -> SMART Model
+2026-01-24 02:34:14 [INFO] kmchat.cli - Tool: delete_activity Args: {'name': 'Pillola A', 'day': 'Venerdì'}
+2026-01-24 02:34:14 [INFO] kmchat.cli - Routing: 'Annulla' -> SMART Model
+2026-01-24 02:34:15 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:34:34 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:34:34 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Camminata' lunedì alle 18:00' -> SMART Model
+2026-01-24 02:34:54 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Camminata', 'days': ['Lunedì'], 'time': '18:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Camminata'}
+2026-01-24 02:34:58 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:34:59 [INFO] kmchat.cli - Routing: 'Sostituisci l'attività Camminata di lunedì con 'Cyclette al chiuso' alle 18:00' -> SMART Model
+2026-01-24 02:35:22 [INFO] kmchat.cli - Tool: modify_activity Args: {'old_name': 'Camminata', 'day': 'Lunedì', 'new_name': 'Cyclette al chiuso', 'new_time': '18:00', 'new_days': [], 'duration_minutes': None}
+2026-01-24 02:35:26 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:35:27 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-24 02:35:49 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-24 02:35:50 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:36:09 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:36:09 [INFO] kmchat.cli - Routing: 'Il paziente non deve assumere liquidi per 24 ore' -> SMART Model
+2026-01-24 02:36:30 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'conditions', 'content': 'Il paziente non deve assumere liquidi per 24 ore'}
+2026-01-24 02:36:30 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:36:31 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Assunzione farmaci con acqua' lunedì alle 12:00' -> SMART Model
+2026-01-24 02:36:53 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Assunzione farmaci con acqua', 'days': ['Lunedì'], 'time': '12:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Assunzione farmaci con acqua'}
+2026-01-24 02:36:58 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-24 02:36:59 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-24 02:37:22 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-24 02:37:22 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:37:41 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:37:41 [INFO] kmchat.cli - Routing: 'La mia visita abituale è alle 18:00' -> SMART Model
+2026-01-24 02:38:02 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'La mia visita abituale è alle 18:00'}
+2026-01-24 02:38:02 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:38:03 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 02:38:30 [INFO] kmchat.cli - Routing: 'Oggi visita anticipata alle 14:00' -> SMART Model
+2026-01-24 02:38:53 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Oggi visita anticipata alle 14:00'}
+2026-01-24 02:38:53 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:38:54 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 02:39:22 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-24 02:39:45 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-24 02:39:45 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:40:05 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:40:05 [INFO] kmchat.cli - Routing: 'Quando dico Aulin intendo la forma granulare' -> SMART Model
+2026-01-24 02:40:25 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Quando dico Aulin intendo la forma granulare'}
+2026-01-24 02:40:26 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:40:27 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 02:40:54 [INFO] kmchat.cli - Routing: 'Da oggi Aulin intendo la supposta' -> SMART Model
+2026-01-24 02:41:17 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Da oggi Aulin intendo la supposta'}
+2026-01-24 02:41:17 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:41:18 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 02:41:46 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-24 02:42:09 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-24 02:42:09 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:42:28 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:42:28 [INFO] kmchat.cli - Routing: 'Dimmi le attività della settimana' -> SMART Model
+2026-01-24 02:42:47 [INFO] kmchat.cli - Tool: get_schedule_week Args: {}
+2026-01-24 02:42:47 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:43:06 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:43:06 [INFO] kmchat.cli - Routing: 'Quali sono le condizioni del paziente?' -> SMART Model
+2026-01-24 02:43:25 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'conditions'}
+2026-01-24 02:43:25 [INFO] kmchat.cli - Routing: 'Quali sono le preferenze del paziente?' -> SMART Model
+2026-01-24 02:43:45 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'preferences'}
+2026-01-24 02:43:45 [INFO] kmchat.cli - Routing: 'Quali sono le abitudini del paziente?' -> SMART Model
+2026-01-24 02:44:12 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'habits'}
+2026-01-24 02:44:13 [INFO] kmchat.cli - Routing: 'Quali sono le note del paziente?' -> SMART Model
+2026-01-24 02:44:34 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'notes'}
+2026-01-24 02:44:34 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:44:53 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:44:53 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-24 02:45:12 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-24 02:45:13 [INFO] kmchat.cli - Routing: 'Quali sono le preferenze semantiche del caregiver?' -> SMART Model
+2026-01-24 02:45:33 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'preferences'}
+2026-01-24 02:45:33 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:45:52 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:45:52 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Controllo pressione' martedì alle 09:00 per i prossimi 2 giorni' -> SMART Model
+2026-01-24 02:46:16 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Controllo pressione', 'days': ['Martedì', 'Mercoledì'], 'time': '09:00', 'duration_days': 2, 'dependencies': [], 'duration_minutes': None, 'description': 'Controllo pressione'}
+2026-01-24 02:46:19 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:46:20 [INFO] kmchat.cli - Routing: 'Dimmi le attività di martedì' -> SMART Model
+2026-01-24 02:46:42 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Martedì'}
+2026-01-24 02:46:43 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:47:01 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:47:02 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Ossigenoterapia' mercoledì' -> SMART Model
+2026-01-24 02:47:30 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Ossigenoterapia', 'days': ['Mercoledì'], 'dependencies': [], 'time': None, 'duration_minutes': None, 'description': 'Ossigenoterapia'}
+2026-01-24 02:47:30 [INFO] kmchat.cli - Routing: 'Alle 11:00' -> SMART Model
+2026-01-24 02:48:01 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:48:22 [INFO] kmchat.cli - Tool: confirm_action Args: {}
+2026-01-24 02:48:22 [INFO] kmchat.cli - Routing: 'Dimmi le attività di mercoledì' -> SMART Model
+2026-01-24 02:48:42 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Mercoledì'}
+2026-01-24 02:48:43 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:49:02 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:49:02 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Colazione' giovedì alle 08:00' -> SMART Model
+2026-01-24 02:49:23 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Colazione', 'days': ['Giovedì'], 'time': '08:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Colazione'}
+2026-01-24 02:49:28 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:49:29 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Farmaco X' giovedì alle 08:30 con dipendenza Colazione' -> SMART Model
+2026-01-24 02:49:54 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Farmaco X', 'days': ['Giovedì'], 'time': '08:30', 'dependencies': ['Colazione'], 'duration_minutes': None, 'description': 'Farmaco X'}
+2026-01-24 02:49:59 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:50:01 [INFO] kmchat.cli - Routing: 'Rimuovi attività 'Colazione' di giovedì' -> SMART Model
+2026-01-24 02:50:26 [INFO] kmchat.cli - Tool: delete_activity Args: {'name': 'Colazione', 'day': 'Giovedì'}
+2026-01-24 02:50:26 [INFO] kmchat.cli - Routing: 'Annulla' -> SMART Model
+2026-01-24 02:50:27 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:50:46 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:50:46 [INFO] kmchat.cli - Routing: 'Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00' -> SMART Model
+2026-01-24 02:51:09 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': "Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00"}
+2026-01-24 02:51:09 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:51:10 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 02:51:38 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-24 02:52:00 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-24 02:52:00 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:52:19 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:52:20 [INFO] kmchat.cli - Routing: 'Dimmi le attività della settimana' -> SMART Model
+2026-01-24 02:52:39 [INFO] kmchat.cli - Tool: get_schedule_week Args: {}
+2026-01-24 02:52:39 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:52:58 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:52:59 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Fisioterapia' martedì alle 10:00' -> SMART Model
+2026-01-24 02:53:20 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Fisioterapia', 'days': ['Martedì'], 'time': '10:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Fisioterapia'}
+2026-01-24 02:53:23 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:53:24 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Visita infermieristica' martedì alle 10:30' -> SMART Model
+2026-01-24 02:53:50 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Visita infermieristica', 'days': ['Martedì'], 'time': '10:30', 'dependencies': [], 'duration_minutes': None, 'description': 'Visita infermieristica'}
+2026-01-24 02:53:56 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-24 02:53:57 [INFO] kmchat.cli - Routing: 'Dimmi le attività di martedì' -> SMART Model
+2026-01-24 02:54:23 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Martedì'}
+2026-01-24 02:54:23 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:54:45 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:54:45 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Prendere pastiglia A' venerdì alle 08:00' -> SMART Model
+2026-01-24 02:55:06 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Prendere pastiglia A', 'days': ['Venerdì'], 'time': '08:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Prendere pastiglia A'}
+2026-01-24 02:55:13 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:55:14 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Prendere pastiglia B' venerdì alle 08:30 con dipendenza Prendere pastiglia A' -> SMART Model
+2026-01-24 02:55:39 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Prendere pastiglia B', 'days': ['Venerdì'], 'time': '08:30', 'dependencies': ['Prendere pastiglia A'], 'duration_minutes': None, 'description': 'Prendere pastiglia B'}
+2026-01-24 02:55:51 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:55:52 [INFO] kmchat.cli - Routing: 'Rimuovi attività 'Prendere pastiglia A' di venerdì' -> SMART Model
+2026-01-24 02:56:17 [INFO] kmchat.cli - Tool: delete_activity Args: {'name': 'Prendere pastiglia A', 'day': 'Venerdì'}
+2026-01-24 02:56:18 [INFO] kmchat.cli - Routing: 'Annulla' -> SMART Model
+2026-01-24 02:56:18 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:56:38 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:56:38 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Uscire a fare una camminata' lunedì alle 18:00' -> SMART Model
+2026-01-24 02:56:59 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Uscire a fare una camminata', 'days': ['Lunedì'], 'time': '18:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Uscire a fare una camminata'}
+2026-01-24 02:57:02 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:57:03 [INFO] kmchat.cli - Routing: 'Sostituisci l'attività Uscire a fare una camminata di lunedì con 'Fare cyclette al chiuso' alle 18:00' -> SMART Model
+2026-01-24 02:57:29 [INFO] kmchat.cli - Tool: modify_activity Args: {'old_name': 'Uscire a fare una camminata', 'day': 'Lunedì', 'new_name': 'Fare cyclette al chiuso', 'new_time': '18:00', 'new_days': [], 'duration_minutes': None}
+2026-01-24 02:57:33 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:57:34 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-24 02:57:59 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-24 02:57:59 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:58:18 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:58:19 [INFO] kmchat.cli - Routing: 'Il paziente non deve assumere liquidi per 24 ore' -> SMART Model
+2026-01-24 02:58:39 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'conditions', 'content': 'Il paziente non deve assumere liquidi per 24 ore'}
+2026-01-24 02:58:40 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 02:58:41 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Assunzione farmaci con acqua' lunedì alle 12:00' -> SMART Model
+2026-01-24 02:59:03 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Assunzione farmaci con acqua', 'days': ['Lunedì'], 'time': '12:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Assunzione farmaci con acqua'}
+2026-01-24 02:59:07 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-24 02:59:08 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-24 02:59:32 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-24 02:59:32 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 02:59:51 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 02:59:52 [INFO] kmchat.cli - Routing: 'Quando dico Aulin intendo la forma granulare' -> SMART Model
+2026-01-24 03:00:12 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Quando dico Aulin intendo la forma granulare'}
+2026-01-24 03:00:12 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 03:00:13 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 03:00:40 [INFO] kmchat.cli - Routing: 'Ora Aulin intendo la supposta' -> SMART Model
+2026-01-24 03:01:02 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Ora Aulin intendo la supposta'}
+2026-01-24 03:01:03 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 03:01:04 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 03:01:31 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-24 03:01:54 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-24 03:01:55 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-24 03:02:13 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-24 03:02:14 [INFO] kmchat.cli - Routing: 'La mia visita abituale è alle 18:00' -> SMART Model
+2026-01-24 03:02:34 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'La mia visita abituale è alle 18:00'}
+2026-01-24 03:02:35 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 03:02:36 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 03:03:02 [INFO] kmchat.cli - Routing: 'Domani visita anticipata alle 14:00' -> SMART Model
+2026-01-24 03:03:25 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Domani visita anticipata alle 14:00'}
+2026-01-24 03:03:26 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-24 03:03:27 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-24 03:03:55 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-24 03:04:18 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-26 16:23:45 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:24:24 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:24:24 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-26 16:24:47 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-26 16:24:47 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Lettura libro' lunedì alle 16:00' -> SMART Model
+2026-01-26 16:25:11 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Lettura libro', 'days': ['Lunedì'], 'time': '16:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Lettura libro'}
+2026-01-26 16:25:12 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:25:13 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-26 16:25:35 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-26 16:25:36 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:25:57 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:25:58 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Fisioterapia' martedì alle 10:00' -> SMART Model
+2026-01-26 16:26:21 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Fisioterapia', 'days': ['Martedì'], 'time': '10:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Fisioterapia'}
+2026-01-26 16:26:22 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:26:23 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Visita Infermieristica' martedì alle 10:15' -> SMART Model
+2026-01-26 16:26:48 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Visita Infermieristica', 'days': ['Martedì'], 'time': '10:15', 'dependencies': [], 'duration_minutes': None, 'description': 'Visita Infermieristica'}
+2026-01-26 16:26:48 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-26 16:26:49 [INFO] kmchat.cli - Routing: 'Dimmi le attività di martedì' -> SMART Model
+2026-01-26 16:27:13 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Martedì'}
+2026-01-26 16:27:14 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:27:35 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:27:36 [INFO] kmchat.cli - Routing: 'Il paziente non può bere latte a colazione' -> SMART Model
+2026-01-26 16:27:58 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'conditions', 'content': 'Il paziente non può bere latte a colazione'}
+2026-01-26 16:27:59 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:28:00 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 16:28:29 [INFO] kmchat.cli - Routing: 'Quali sono le condizioni del paziente?' -> SMART Model
+2026-01-26 16:28:51 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'conditions'}
+2026-01-26 16:28:52 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:29:12 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:29:12 [INFO] kmchat.cli - Routing: 'Quando dico 'sera' intendo le ore 21:00' -> SMART Model
+2026-01-26 16:29:37 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': "Quando dico 'sera' intendo le ore 21:00"}
+2026-01-26 16:29:38 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:29:39 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Camomilla' mercoledì di sera' -> SMART Model
+2026-01-26 16:30:06 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Camomilla', 'days': ['Mercoledì'], 'time': '21:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Camomilla'}
+2026-01-26 16:30:10 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:30:11 [INFO] kmchat.cli - Routing: 'Dimmi le attività di mercoledì' -> SMART Model
+2026-01-26 16:30:40 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Mercoledì'}
+2026-01-26 16:30:40 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:31:02 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:31:03 [INFO] kmchat.cli - Routing: 'Il paziente ha il diabete di tipo 1' -> SMART Model
+2026-01-26 16:31:25 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'conditions', 'content': 'Il paziente ha il diabete di tipo 1'}
+2026-01-26 16:31:25 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:31:26 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Merenda con Torta' giovedì alle 16:00' -> SMART Model
+2026-01-26 16:31:50 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Merenda con Torta', 'days': ['Giovedì'], 'time': '16:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Merenda con Torta'}
+2026-01-26 16:31:54 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-26 16:31:54 [INFO] kmchat.cli - Routing: 'Dimmi le attività di giovedì' -> SMART Model
+2026-01-26 16:32:20 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Giovedì'}
+2026-01-26 16:32:21 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:32:42 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:32:42 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Pillola A' venerdì alle 08:00' -> SMART Model
+2026-01-26 16:33:06 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Pillola A', 'days': ['Venerdì'], 'time': '08:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Pillola A'}
+2026-01-26 16:33:10 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:33:12 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Pillola B' venerdì alle 08:30 con dipendenza Pillola A' -> SMART Model
+2026-01-26 16:33:39 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Pillola B', 'days': ['Venerdì'], 'time': '08:30', 'dependencies': ['Pillola A'], 'duration_minutes': None, 'description': 'Pillola B'}
+2026-01-26 16:33:43 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:33:45 [INFO] kmchat.cli - Routing: 'Rimuovi attività 'Pillola A' di venerdì' -> SMART Model
+2026-01-26 16:34:10 [INFO] kmchat.cli - Tool: delete_activity Args: {'name': 'Pillola A', 'day': 'Venerdì'}
+2026-01-26 16:34:11 [INFO] kmchat.cli - Routing: 'Annulla' -> SMART Model
+2026-01-26 16:34:11 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:34:32 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:34:32 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Camminata' lunedì alle 18:00' -> SMART Model
+2026-01-26 16:34:54 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Camminata', 'days': ['Lunedì'], 'time': '18:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Camminata'}
+2026-01-26 16:34:58 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:34:59 [INFO] kmchat.cli - Routing: 'Sostituisci l'attività Camminata di lunedì con 'Cyclette al chiuso' alle 18:00' -> SMART Model
+2026-01-26 16:35:25 [INFO] kmchat.cli - Tool: modify_activity Args: {'old_name': 'Camminata', 'day': 'Lunedì', 'new_name': 'Cyclette al chiuso', 'new_time': '18:00', 'new_days': [], 'duration_minutes': None}
+2026-01-26 16:35:28 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:35:30 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-26 16:35:54 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-26 16:35:54 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:36:15 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:36:15 [INFO] kmchat.cli - Routing: 'Il paziente non deve assumere liquidi per 24 ore' -> SMART Model
+2026-01-26 16:36:37 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'conditions', 'content': 'Il paziente non deve assumere liquidi per 24 ore'}
+2026-01-26 16:36:37 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:36:38 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Assunzione farmaci con acqua' lunedì alle 12:00' -> SMART Model
+2026-01-26 16:37:02 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Assunzione farmaci con acqua', 'days': ['Lunedì'], 'time': '12:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Assunzione farmaci con acqua'}
+2026-01-26 16:37:07 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-26 16:37:08 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-26 16:37:32 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-26 16:37:32 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:37:53 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:37:53 [INFO] kmchat.cli - Routing: 'La mia visita abituale è alle 18:00' -> SMART Model
+2026-01-26 16:38:15 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'La mia visita abituale è alle 18:00'}
+2026-01-26 16:38:16 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:38:17 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 16:38:45 [INFO] kmchat.cli - Routing: 'Oggi visita anticipata alle 14:00' -> SMART Model
+2026-01-26 16:39:10 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Oggi visita anticipata alle 14:00'}
+2026-01-26 16:39:10 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:39:11 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 16:39:41 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-26 16:40:07 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-26 16:40:07 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:40:29 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:40:29 [INFO] kmchat.cli - Routing: 'Quando dico Aulin intendo la forma granulare' -> SMART Model
+2026-01-26 16:40:53 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Quando dico Aulin intendo la forma granulare'}
+2026-01-26 16:40:53 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:40:55 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 16:41:26 [INFO] kmchat.cli - Routing: 'Da oggi Aulin intendo la supposta' -> SMART Model
+2026-01-26 16:41:51 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Da oggi Aulin intendo la supposta'}
+2026-01-26 16:41:52 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:41:53 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 16:42:24 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-26 16:42:49 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-26 16:42:49 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:43:10 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:43:10 [INFO] kmchat.cli - Routing: 'Dimmi le attività della settimana' -> SMART Model
+2026-01-26 16:43:31 [INFO] kmchat.cli - Tool: get_schedule_week Args: {}
+2026-01-26 16:43:31 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:43:52 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:43:52 [INFO] kmchat.cli - Routing: 'Quali sono le condizioni del paziente?' -> SMART Model
+2026-01-26 16:44:13 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'conditions'}
+2026-01-26 16:44:13 [INFO] kmchat.cli - Routing: 'Quali sono le preferenze del paziente?' -> SMART Model
+2026-01-26 16:44:34 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'preferences'}
+2026-01-26 16:44:34 [INFO] kmchat.cli - Routing: 'Quali sono le abitudini del paziente?' -> SMART Model
+2026-01-26 16:44:56 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'habits'}
+2026-01-26 16:44:57 [INFO] kmchat.cli - Routing: 'Quali sono le note del paziente?' -> SMART Model
+2026-01-26 16:45:18 [INFO] kmchat.cli - Tool: get_patient_info Args: {'category': 'notes'}
+2026-01-26 16:45:19 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:45:39 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:45:40 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-26 16:46:01 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-26 16:46:01 [INFO] kmchat.cli - Routing: 'Quali sono le preferenze semantiche del caregiver?' -> SMART Model
+2026-01-26 16:46:23 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'preferences'}
+2026-01-26 16:46:24 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:46:45 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:46:45 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Controllo pressione' martedì alle 09:00 per i prossimi 2 giorni' -> SMART Model
+2026-01-26 16:47:10 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Controllo pressione', 'days': ['Martedì', 'Mercoledì'], 'time': '09:00', 'duration_days': 2, 'dependencies': [], 'duration_minutes': None, 'description': 'Controllo pressione'}
+2026-01-26 16:47:14 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:47:15 [INFO] kmchat.cli - Routing: 'Dimmi le attività di martedì' -> SMART Model
+2026-01-26 16:47:38 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Martedì'}
+2026-01-26 16:47:39 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:47:59 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:47:59 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Ossigenoterapia' mercoledì' -> SMART Model
+2026-01-26 16:48:30 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Ossigenoterapia', 'days': ['Mercoledì'], 'dependencies': [], 'time': None, 'duration_minutes': None, 'description': 'Ossigenoterapia'}
+2026-01-26 16:48:30 [INFO] kmchat.cli - Routing: 'Alle 11:00' -> SMART Model
+2026-01-26 16:49:05 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:49:28 [INFO] kmchat.cli - Tool: confirm_action Args: {}
+2026-01-26 16:49:28 [INFO] kmchat.cli - Routing: 'Dimmi le attività di mercoledì' -> SMART Model
+2026-01-26 16:49:50 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Mercoledì'}
+2026-01-26 16:49:51 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:50:12 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:50:12 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Colazione' giovedì alle 08:00' -> SMART Model
+2026-01-26 16:50:37 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Colazione', 'days': ['Giovedì'], 'time': '08:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Colazione'}
+2026-01-26 16:50:43 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:50:44 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Farmaco X' giovedì alle 08:30 con dipendenza Colazione' -> SMART Model
+2026-01-26 16:51:13 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Farmaco X', 'days': ['Giovedì'], 'time': '08:30', 'dependencies': ['Colazione'], 'duration_minutes': None, 'description': 'Farmaco X'}
+2026-01-26 16:51:19 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:51:22 [INFO] kmchat.cli - Routing: 'Rimuovi attività 'Colazione' di giovedì' -> SMART Model
+2026-01-26 16:51:49 [INFO] kmchat.cli - Tool: delete_activity Args: {'name': 'Colazione', 'day': 'Giovedì'}
+2026-01-26 16:51:50 [INFO] kmchat.cli - Routing: 'Annulla' -> SMART Model
+2026-01-26 16:51:50 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:52:12 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:52:12 [INFO] kmchat.cli - Routing: 'Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00' -> SMART Model
+2026-01-26 16:52:37 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': "Quando dico mattina intendo l'intervallo tra le 08:00 e le 10:00"}
+2026-01-26 16:52:37 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:52:38 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 16:53:09 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-26 16:53:33 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-26 16:53:34 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:53:54 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:53:55 [INFO] kmchat.cli - Routing: 'Dimmi le attività della settimana' -> SMART Model
+2026-01-26 16:54:17 [INFO] kmchat.cli - Tool: get_schedule_week Args: {}
+2026-01-26 16:54:17 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:54:38 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:54:39 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Fisioterapia' martedì alle 10:00' -> SMART Model
+2026-01-26 16:55:02 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Fisioterapia', 'days': ['Martedì'], 'time': '10:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Fisioterapia'}
+2026-01-26 16:55:06 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:55:06 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Visita infermieristica' martedì alle 10:30' -> SMART Model
+2026-01-26 16:55:34 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Visita infermieristica', 'days': ['Martedì'], 'time': '10:30', 'dependencies': [], 'duration_minutes': None, 'description': 'Visita infermieristica'}
+2026-01-26 16:55:39 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-26 16:55:40 [INFO] kmchat.cli - Routing: 'Dimmi le attività di martedì' -> SMART Model
+2026-01-26 16:56:06 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Martedì'}
+2026-01-26 16:56:07 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:56:27 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:56:28 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Prendere pastiglia A' venerdì alle 08:00' -> SMART Model
+2026-01-26 16:56:52 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Prendere pastiglia A', 'days': ['Venerdì'], 'time': '08:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Prendere pastiglia A'}
+2026-01-26 16:57:00 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:57:01 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Prendere pastiglia B' venerdì alle 08:30 con dipendenza Prendere pastiglia A' -> SMART Model
+2026-01-26 16:57:29 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Prendere pastiglia B', 'days': ['Venerdì'], 'time': '08:30', 'dependencies': ['Prendere pastiglia A'], 'duration_minutes': None, 'description': 'Prendere pastiglia B'}
+2026-01-26 16:57:36 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:57:37 [INFO] kmchat.cli - Routing: 'Rimuovi attività 'Prendere pastiglia A' di venerdì' -> SMART Model
+2026-01-26 16:58:05 [INFO] kmchat.cli - Tool: delete_activity Args: {'name': 'Prendere pastiglia A', 'day': 'Venerdì'}
+2026-01-26 16:58:06 [INFO] kmchat.cli - Routing: 'Annulla' -> SMART Model
+2026-01-26 16:58:06 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 16:58:28 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 16:58:28 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Uscire a fare una camminata' lunedì alle 18:00' -> SMART Model
+2026-01-26 16:58:52 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Uscire a fare una camminata', 'days': ['Lunedì'], 'time': '18:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Uscire a fare una camminata'}
+2026-01-26 16:58:56 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:58:57 [INFO] kmchat.cli - Routing: 'Sostituisci l'attività Uscire a fare una camminata di lunedì con 'Fare cyclette al chiuso' alle 18:00' -> SMART Model
+2026-01-26 16:59:26 [INFO] kmchat.cli - Tool: modify_activity Args: {'old_name': 'Uscire a fare una camminata', 'day': 'Lunedì', 'new_name': 'Fare cyclette al chiuso', 'new_time': '18:00', 'new_days': [], 'duration_minutes': None}
+2026-01-26 16:59:30 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 16:59:32 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-26 16:59:59 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-26 16:59:59 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 17:00:20 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 17:00:21 [INFO] kmchat.cli - Routing: 'Il paziente non deve assumere liquidi per 24 ore' -> SMART Model
+2026-01-26 17:00:43 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'conditions', 'content': 'Il paziente non deve assumere liquidi per 24 ore'}
+2026-01-26 17:00:43 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 17:00:44 [INFO] kmchat.cli - Routing: 'Aggiungi attività 'Assunzione farmaci con acqua' lunedì alle 12:00' -> SMART Model
+2026-01-26 17:01:09 [INFO] kmchat.cli - Tool: add_activity Args: {'name': 'Assunzione farmaci con acqua', 'days': ['Lunedì'], 'time': '12:00', 'dependencies': [], 'duration_minutes': None, 'description': 'Assunzione farmaci con acqua'}
+2026-01-26 17:01:14 [INFO] kmchat.cli - Routing: 'No' -> SMART Model
+2026-01-26 17:01:15 [INFO] kmchat.cli - Routing: 'Dimmi le attività di lunedì' -> SMART Model
+2026-01-26 17:01:40 [INFO] kmchat.cli - Tool: get_schedule Args: {'day': 'Lunedì'}
+2026-01-26 17:01:41 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 17:02:03 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 17:02:03 [INFO] kmchat.cli - Routing: 'Quando dico Aulin intendo la forma granulare' -> SMART Model
+2026-01-26 17:02:27 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Quando dico Aulin intendo la forma granulare'}
+2026-01-26 17:02:28 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 17:02:29 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 17:02:59 [INFO] kmchat.cli - Routing: 'Ora Aulin intendo la supposta' -> SMART Model
+2026-01-26 17:03:24 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Ora Aulin intendo la supposta'}
+2026-01-26 17:03:25 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 17:03:26 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 17:03:57 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-26 17:04:23 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}
+2026-01-26 17:04:24 [INFO] kmchat.cli - Routing: 'Passa al paziente TestAuto1 e caregiver CaregiverTest' -> SMART Model
+2026-01-26 17:04:44 [INFO] kmchat.cli - Tool: switch_context Args: {'patient_id': 'TestAuto1', 'caregiver_id': 'CaregiverTest'}
+2026-01-26 17:04:45 [INFO] kmchat.cli - Routing: 'La mia visita abituale è alle 18:00' -> SMART Model
+2026-01-26 17:05:07 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'La mia visita abituale è alle 18:00'}
+2026-01-26 17:05:07 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 17:05:08 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 17:05:38 [INFO] kmchat.cli - Routing: 'Domani visita anticipata alle 14:00' -> SMART Model
+2026-01-26 17:06:03 [INFO] kmchat.cli - Tool: save_knowledge Args: {'category': 'caregiver', 'content': 'Domani visita anticipata alle 14:00'}
+2026-01-26 17:06:03 [INFO] kmchat.cli - Routing: 'Conferma' -> SMART Model
+2026-01-26 17:06:04 [INFO] kmchat.cli - Routing: 'Salva questa informazione' -> SMART Model
+2026-01-26 17:06:35 [INFO] kmchat.cli - Routing: 'Quali sono le note del caregiver?' -> SMART Model
+2026-01-26 17:07:01 [INFO] kmchat.cli - Tool: get_caregiver_info Args: {'category': 'notes'}

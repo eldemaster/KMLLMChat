@@ -1,1 +1,12 @@
-{"patient_id": "TestAuto1", "name": "TestAuto1", "medical_conditions": [], "preferences": [], "habits": [], "notes": []}
+{
+    "patient_id": "TestAuto1",
+    "name": "TestAuto1",
+    "medical_conditions": [
+        "Il paziente non può bere latte a colazione",
+        "Il paziente ha il diabete di tipo 1",
+        "Il paziente non deve assumere liquidi per 24 ore"
+    ],
+    "preferences": [],
+    "habits": [],
+    "notes": []
+}

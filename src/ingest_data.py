@@ -26,6 +26,7 @@ def _build_activity_doc(activity: dict, patient_id: str) -> Document | None:
     description = activity.get("description") or ""
     days = activity.get("day_of_week") or []
     time = activity.get("time") or ""
+    duration_minutes = activity.get("duration_minutes")
     dependencies = activity.get("dependencies") or []
     valid_from = activity.get("valid_from")
     valid_until = activity.get("valid_until")
@@ -35,6 +36,7 @@ def _build_activity_doc(activity: dict, patient_id: str) -> Document | None:
         f"Descrizione: {description}",
         f"Giorni: {', '.join(days)}",
         f"Orario: {time}",
+        f"Durata (minuti): {duration_minutes if duration_minutes is not None else 'Non specificata'}",
         f"Dipendenze: {', '.join(dependencies) if dependencies else 'Nessuna'}",
     ]
     if valid_from:

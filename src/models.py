@@ -19,6 +19,7 @@ class Activity(BaseModel):
     description: str = Field(..., description="Descrizione dettagliata dell'attività")
     day_of_week: List[str] = Field(..., description="Giorni della settimana in cui svolgere l'attività")
     time: str = Field(..., description="Orario specifico (es. 08:00) o finestra temporale (es. 09:00-09:30)")
+    duration_minutes: Optional[int] = Field(None, description="Durata in minuti se l'orario è un singolo orario")
     dependencies: List[str] = Field(default_factory=list, description="Lista di attività o eventi da cui questa attività dipende")
     valid_from: Optional[str] = Field(None, description="Data inizio validità (YYYY-MM-DD)")
     valid_until: Optional[str] = Field(None, description="Data fine validità (YYYY-MM-DD)")
