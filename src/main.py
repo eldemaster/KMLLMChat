@@ -101,6 +101,7 @@ def _parse_time_to_minutes(value: str) -> int | None:
         return None
 
 def _normalize_time_and_duration(time_str: str | None, duration_minutes: int | None) -> tuple[str | None, int | None]:
+    # Normalize time windows into start-time + duration for consistent scheduling logic.
     if not time_str:
         return time_str, duration_minutes
     cleaned = str(time_str).strip()
@@ -165,6 +166,7 @@ def _shorten_semantic_warning(text: str, max_len: int = 180) -> str:
     return cleaned
 
 def _ensure_patient_context() -> str | None:
+    # Guard against actions without an explicit patient context.
     if not km.current_patient_id or not km.patient_profile:
         return "Nessun paziente selezionato. Usa switch_context(patient_id, caregiver_id)."
     return None
@@ -600,9 +602,9 @@ Rispondi SOLO con:
 """
     # Usiamo il modello SMART per il ragionamento
     llm_smart = Settings.llm  # Assumiamo che Settings.llm sia quello smart o riconfiguriamolo
-    print(f"\n[SEMANTIC CHECK] Analyzing...")
+    logger.debug("[SEMANTIC CHECK] Analyzing...")
     response = llm_smart.complete(prompt).text.strip()
-    print(f"[SEMANTIC CHECK] LLM Response: {response}") # Log cruciale per debug
+    logger.debug("[SEMANTIC CHECK] LLM Response: %s", response)
     
     # Parsing robusto: cerchiamo un "SI" o "SÌ" esplicito all'inizio
     # Se l'LLM dice "No, non c'è conflitto" o "Confermato", allora NON è un blocco.
@@ -909,9 +911,7 @@ def add_activity_tool(
             ) + warning_msg
 
         # 5. Esecuzione Reale (Post-Conferma)
-        print(f"[DEBUG] Invoking KM.add_activity for {name}...")
         result = km.add_activity(new_activity, force=force)
-        print(f"[DEBUG] KM result: {result}")
         
         if "successo" in result.lower():
             _index_activity_in_rag(new_activity, "add")
@@ -1027,7 +1027,7 @@ def consult_guidelines_tool(query: str) -> str:
 
 def confirm_action_tool() -> str:
     pending = _consume_pending_action()
-    print(f"[DEBUG] Confirming pending action: {pending}")
+    logger.debug("Confirming pending action: %s", pending)
     if not pending:
         return "Nessuna azione in sospeso."
     tname = pending.get("tool_name")
@@ -1272,8 +1272,7 @@ async def run_agent_step(llms: Dict, user_input: str) -> AsyncGenerator[str, Non
                 args = {k: v for k, v in data.items() if k not in ("action", "tool_name")}
             
             args = _sanitize_tool_args(tname, args, user_input=user_input)
-            logger.info(f"Tool: {tname} Args: {args}")
-            print(f"[DEBUG] Args: {args}")
+            logger.info("Tool: %s Args: %s", tname, args)
             
             if auto_confirm_msg and tname in {"confirm_action", "cancel_action"}:
                 final_reply = auto_confirm_msg
